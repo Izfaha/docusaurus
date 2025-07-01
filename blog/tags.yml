@@ -1,0 +1,34 @@
+facebook:
+  label: Facebook
+  permalink: /facebook
+  description: Facebook tag description
+
+hello:
+  label: Hello
+  permalink: /hello
+  description: Hello tag description
+
+docusaurus:
+  label: Docusaurus
+  permalink: /docusaurus
+  description: Docusaurus tag description
+
+freeradius:
+  label: Freeradius
+  permalink: /freeradius
+  description: Network Management System
+
+greetings:
+  label: Greetings
+  permalink: /all-faiz-articles
+  description: Article created by Fa'iz
+
+linux:
+  label: linux
+  permalink: /linux
+  description: linux
+
+arch:
+  label: arch
+  permalink: /arch
+  description: Arch Linux
