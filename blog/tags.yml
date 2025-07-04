@@ -32,3 +32,13 @@ arch:
   label: arch
   permalink: /arch
   description: Arch Linux
+
+jetson-nano:
+  label: Jetson Nano
+  permalink: /jetson-nano
+  description: Jetson Nano
+
+secure:
+  label: Secure
+  permalink: /secure
+  description: Secure tag description

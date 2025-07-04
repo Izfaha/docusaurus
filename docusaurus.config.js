@@ -30,7 +30,7 @@ const config = {
   organizationName: 'Izfaha', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
   deploymentBranch: 'gh-pages', // The branch that GitHub pages will deploy from.
-
+   // The branch that your local Docusaurus site is built from.
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
