@@ -42,3 +42,13 @@ secure:
   label: Secure
   permalink: /secure
   description: Secure tag description
+
+c:
+  label: C-Language
+  permalink: /c
+  description: C programming language
+
+python:
+  label: Python
+  permalink: /python
+  description: Python programming language

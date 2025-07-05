@@ -84,9 +84,9 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: 'DocuLog',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'DocuLog by Izfaha',
           src: 'img/logo.svg',
         },
         items: [
@@ -147,11 +147,12 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} DocuLog, Inc. Built with love.`,
+        copyright: `Copyright © ${new Date().getFullYear()} DocuLog, Inc. Made with love.`,
       },
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+        additionalLanguages: ['c', 'python', 'bash'],
       },
     }),
 };
