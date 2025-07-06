@@ -86,6 +86,8 @@ ifconfig || ip a
 
 ### Set IP Interface
 
+![IP list](./img/addres-list.png)
+
 ### Set hotspot
 
 ```mikrotik

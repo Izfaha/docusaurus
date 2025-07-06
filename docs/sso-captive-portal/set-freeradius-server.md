@@ -83,10 +83,9 @@ Edit file module.
 sudo vim /etc/freeradius/3.0/mods-available/sql
 ```
 
-Find and uncomment this code: 
+Find and uncomment this code:
 
 ```sh
-driver = "rlm_sql_postgresql"
 # === ubah bagian connection
 dialect = "postgresql"
 driver = "rlm_sql_postgresql"
@@ -114,7 +113,7 @@ Connected to database successfully
 ### Add user to database
 
 ```sql
-INSERT INTO radcheck (username, attribute, op, value) VALUES ('faiz', 'Cleartext-Password', ':=', '123456');
+INSERT INTO radcheck (username, attribute, op, value) VALUES ('debian-client', 'Cleartext-Password', ':=', 'debian');
 ```
 
 ## Setting Freeradius

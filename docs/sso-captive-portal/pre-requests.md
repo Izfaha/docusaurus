@@ -21,4 +21,3 @@ This section details the essential virtual machines (VMs) and their respective r
 
 3. **Client Machines (Debian and Arch Linux):**
     * These distinct Linux distributions will function as the network endpoints, or "clients," within our simulated environment, allowing for comprehensive testing of authentication and network access protocols.
-    
