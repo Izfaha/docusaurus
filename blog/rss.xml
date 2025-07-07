@@ -48,9 +48,26 @@ Setting up the IP to static is piece of cake, Just bash it out.</p>
 <code>ipv4.gateway your-gateway</code><br>
 <code>ipv4.dns "8.8.8.8 8.8.4.4"</code><br>
 <code>ipv4.method manual</code></p></div></div>
-<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>Note</div><div class="admonitionContent_BuS1"><p>If you use LAN or Ethernet cable just change its name according to your LAN, like 'wired connection 1'. Just it dude!</p></div></div>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>Note</div><div class="admonitionContent_BuS1"><p>If you use LAN or Ethernet cable just change its name according to your LAN, like 'wired connection 1'.</p><div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">nmcli connection up </span><span class="token string" style="color:#e3116c">"Wired connection 1"</span><br></span></code></pre></div></div><p>Just it dude!</p></div></div>
 <p>Then check your ip using <code>ip a</code>.
-And boom! you pull it off dawg!</p>]]></content:encoded>
+And boom! you pull it off dawg!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="issues">Issues<a href="https://izfaha.github.io/docusaurus/blog/ip-static-networkmanager/#issues" class="hash-link" aria-label="Direct link to Issues" title="Direct link to Issues">​</a></h2>
+<ol>
+<li>
+<p>Can not connect internet when LAN is pluged in.</p>
+<ul>
+<li>You need to remove your connection using this command.</li>
+</ul>
+<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">nmcli connection delete </span><span class="token string" style="color:#e3116c">"Wired connection 1"</span><br></span></code></pre></div></div>
+<p>Then verify, whether your connection to browse or google, and check your IP <code>ip a</code>.
+If you need to auto connect when pluging your LAN in, just use this command.</p>
+<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">nmcli connection modify </span><span class="token string" style="color:#e3116c">"Wired connection 1"</span><span class="token plain"> connection.autoconnect </span><span class="token function" style="color:#d73a49">yes</span><br></span></code></pre></div></div>
+<ul>
+<li>Cara hapus IP dari eth0</li>
+</ul>
+<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">sudo</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">ip</span><span class="token plain"> addr del </span><span class="token number" style="color:#36acaa">192.168</span><span class="token plain">.77.151/24 dev eth0</span><br></span></code></pre></div></div>
+</li>
+</ol>]]></content:encoded>
             <category>arch</category>
             <category>linux</category>
         </item>
