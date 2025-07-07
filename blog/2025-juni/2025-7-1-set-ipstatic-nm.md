@@ -33,8 +33,36 @@ Place ```COE_WIFI``` with your actual wifi name.\
 :::
 
 :::note[Note]
-If you use LAN or Ethernet cable just change its name according to your LAN, like 'wired connection 1'. Just it dude!
+If you use LAN or Ethernet cable just change its name according to your LAN, like 'wired connection 1'.
+
+```sh
+nmcli connection up "Wired connection 1"
+```
+
+Just it dude!
 :::
 
 Then check your ip using ```ip a```.
 And boom! you pull it off dawg!
+
+## Issues
+
+1. Can not connect internet when LAN is pluged in.
+    - You need to remove your connection using this command.
+
+    ```sh
+    nmcli connection delete "Wired connection 1"
+    ```
+
+    Then verify, whether your connection to browse or google, and check your IP `ip a`.
+    If you need to auto connect when pluging your LAN in, just use this command.
+
+    ```sh
+    nmcli connection modify "Wired connection 1" connection.autoconnect yes
+    ```
+
+    - Cara hapus IP dari eth0
+
+    ```sh
+    sudo ip addr del 192.168.77.151/24 dev eth0
+    ```
