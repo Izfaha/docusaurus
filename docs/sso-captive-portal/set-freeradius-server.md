@@ -57,9 +57,24 @@ psql
 
 ### Create User and Database
 
+1. Create user and database for FreeRADIUS
+
 ```sql
 CREATE USER radius WITH PASSWORD 'freeradius';
 CREATE DATABASE radiusdb WITH OWNER radius;
+```
+
+2. Membuat user untuk client vm.
+
+```sql
+INSERT INTO radcheck (username, attribute, op, value)
+VALUES ('debian-client', 'Cleartext-Password', ':=', 'debian');
+```
+
+Verify whether user for client vm exist.
+
+```sql
+SELECT * FROM radcheck WHERE username = 'debian-client';
 ```
 
 ### Create Table Using Radius Template

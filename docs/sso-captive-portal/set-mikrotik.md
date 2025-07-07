@@ -84,13 +84,32 @@ ifconfig || ip a
 
 ## CHR Configuration Using MikroTik
 
-### Set IP Interface
+1. Set IP Interface
 
 ![IP list](./img/addres-list.png)
 
-### Set hotspot
+2. Set hotspot
 
-```mikrotik
+I establishes a new Hotspot instance within Mikrotik RouterOS on the `ether2` interface, leveraging the `hs-pool1` address range for client IP assignment, adhering to the configurations defined in `hsprof1`, and designated by the name `hotspot1`.
+
+```sh
 /ip hotspot add interface=ether2 address-pool=hs-pool1 profile=hsprof1 name=hotspot1
+# buat hotspot untuk menggunakan freeradius
 /ip hotspot user profile set hsprof1 use-radius=yes
+# check dan cari apakah 'use-radius=yes' harus 'yes'
+/ip hotspot profile print
+# kalo belum pake command berikut, lalu ketik angka profile yang perlu diseting menggunakan freeradius
+/ip hotspot profile set use-radius=yes
+```
+
+![hsprof](./img/hsprofile.png)
+
+3. Configure MikroTik to use FreeRADIUS
+
+Tambahkan IP radius server dengan secret 'secret123' **(secret boleh diubah)**.
+
+```sh
+/ip hotspot profile set use-radius=yes
+/ppp aaa set use-radius=yes
+/radius add address=192.168.1.2 secret=secret123 service=ppp,hotspot
 ```
