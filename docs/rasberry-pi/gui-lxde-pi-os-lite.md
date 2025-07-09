@@ -71,7 +71,8 @@ reboot
 
 ## Error solver
 
-if you do not enter the LDX GUI session, run this command
+if you do not enter the LDX GUI session, run this command in **tty**.
+You can enter TTY session using 'CTRL + ALT + F1 - F6'. Login as your user and run these command.
 
 ```sh
 startx 
