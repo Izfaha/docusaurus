@@ -84,5 +84,3 @@ it will start the Xorg server.
 Also, you can check log in `.xsession-errors` and `/var/log/lightdm/lightdm.log`.
 
 ## Additional Command
-
-
