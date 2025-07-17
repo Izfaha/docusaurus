@@ -13,6 +13,16 @@ docusaurus:
   permalink: /docusaurus
   description: Docusaurus tag description
 
+programming:
+  label: Programming
+  permalink: /programming
+  description: Programming tag description
+
+docker:
+  label: Docker
+  permalink: /docker
+  description: Docker tag description
+
 freeradius:
   label: Freeradius
   permalink: /freeradius
@@ -52,3 +62,8 @@ python:
   label: Python
   permalink: /python
   description: Python programming language
+
+laravel:
+  label: Laravel
+  permalink: /laravel
+  description: Laravel framework
