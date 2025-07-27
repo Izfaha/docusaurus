@@ -1,0 +1,13 @@
+{
+  "label": "Docker - Tutorial",
+  "position": 10,
+  "collapsed": true,
+  "className": "docker-tutorial",
+  "link": {
+      "type": "generated-index"
+    },
+  "customProps": {
+    "description": "A comprehensive guide to Docker, covering installation, basic commands, and advanced topics like Docker Compose and Swarm.",
+    "keywords": ["Docker", "Tutorial", "Container", "Docker Compose", "Swarm"]
+  }
+}
