@@ -1,0 +1,13 @@
+{
+  "label": "Assembly - Tutorial",
+  "position": 13,
+  "collapsed": true,
+  "className": "assembly-tutorial",
+  "link": {
+      "type": "generated-index"
+    },
+  "customProps": {
+    "description": "Assembly learn documentation",
+    "keywords": ["Docker", "Tutorial", "Container", "Docker Compose", "Swarm"]
+  }
+}
