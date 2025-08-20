@@ -32,3 +32,19 @@ sidebar_title: Linux Kernel Development Process
 # Active Kernel Release
 
 ![Abbreviation](./img/akr.png)
+
+# Kernel Trees
+
+![Kernel Trees](./img/trees.png)
+
+# Subsystem Mainteners
+
+![Subs](./img/sub-main.png)
+
+[MAINTAINERS file](https://www.kernel.org/doc/linux/MAINTAINERS), 
+[Linux kernel mailing lists](https://subspace.kernel.org/vger.kernel.org.html)
+[list archives on lore.kernel.org](https://lore.kernel.org/)
+[kernel.org git repositories](https://git.kernel.org/)
+[]
+
+![image flow](./img/patch-flow.png)
