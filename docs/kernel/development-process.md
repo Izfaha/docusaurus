@@ -45,6 +45,5 @@ sidebar_title: Linux Kernel Development Process
 [Linux kernel mailing lists](https://subspace.kernel.org/vger.kernel.org.html)
 [list archives on lore.kernel.org](https://lore.kernel.org/)
 [kernel.org git repositories](https://git.kernel.org/)
-[]
 
 ![image flow](./img/patch-flow.png)
