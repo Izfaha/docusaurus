@@ -1,5 +1,6 @@
-name: Deploy to GitHub Pages
+name: Deploy Docusaurus to GitHub Pages
 
+# this flow will be ran and applied when push code to github
 on:
   push:
     branches:
@@ -8,23 +9,31 @@ on:
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-acnptions#on
 
 jobs:
+  # decide jobs named build
   build:
     name: Build Docusaurus
     runs-on: ubuntu-latest
     steps:
+      # fetch all of code from repository to build
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      # install node js v24
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 24
           cache: npm
 
+      # run 'npm ci' to install depedencies according to 'package-lock.json'
       - name: Install dependencies
         run: npm ci
-      - name: Build website
-        run: npm build
 
+      # build website
+      - name: Build website
+        run: npm run build
+
+      # upload build/ folder in order to be gotten by job deploy 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -35,6 +44,7 @@ jobs:
     needs: build
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    # Memberikan izin khusus ke GitHub Actions supaya bisa mengunggah hasil ke GitHub Pages.
     permissions:
       pages: write # to deploy to Pages
       id-token: write # to verify the deployment originates from an appropriate source
@@ -44,6 +54,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
+    # send build result to GitHub Pages using official action from GitHub
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
