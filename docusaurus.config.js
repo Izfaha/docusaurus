@@ -32,7 +32,11 @@ const config = {
   deploymentBranch: 'gh-pages', // The branch that GitHub pages will deploy from.
    // The branch that your local Docusaurus site is built from.
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown : {
+    hooks : {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   trailingSlash: true, 
 
