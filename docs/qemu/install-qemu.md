@@ -52,5 +52,7 @@ remote-viewer vnc://localhost:5900
 ```
 
 :::note
+
 The password is root
+
 :::

@@ -1,0 +1,13 @@
+{
+  "label": "AES - Advance Encryption Standart",
+  "position": 18,
+  "collapsed": true,
+  "className": "aes-encryption",
+  "link": {
+      "type": "generated-index"
+    },
+  "customProps": {
+    "description": "AES learn",
+    "keywords": ["AES", "Encryption", "Decryption", "Crypto", "Linux"]
+  }
+}
