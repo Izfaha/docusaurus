@@ -47,3 +47,8 @@ python:
   label: Python
   permalink: /python
   description: Python programming language
+
+network:
+  label: Network
+  permalink: /network
+  description: Linux Netwoking 
