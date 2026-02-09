@@ -1,3 +1,8 @@
+---
+sidebar_title: Get start to Kubernetes
+sidebar_position: 2
+---
+
 # Get start to Kubernetes
 
 ## Quick Installation using Play with Kubernetes

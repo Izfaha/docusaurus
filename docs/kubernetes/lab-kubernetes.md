@@ -1,3 +1,8 @@
+---
+sidebar_title: Kubernetes LAB
+sidebar_position: 3
+---
+
 # Kubernetes LAB
 
 ## Introduction 
@@ -152,3 +157,22 @@ lsmod | grep -e br_netfilter -e overlay
 Next step we need to install kubectl, kubelet and kubeadm in each vm.
 
 this is an official documentation from [kubernetes](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management) using native package using `apt`.
+
+:::caution[Important]
+Follow the instruction in kubernetes documentation first.
+:::
+
+```sh
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+# dont forget to hold kubernetes component version
+sudo apt-mark hold kubelet kubeadm kubectl
+```
+
+:::note[Info]
+if you want to update kubernetes components do not forget unhold the components, just hit this command.
+
+```sh
+sudo apt-mark unhold kubelet kubeadm kubectl
+```
+:::
