@@ -52,3 +52,8 @@ network:
   label: Network
   permalink: /network
   description: Linux Netwoking 
+
+usb:
+  label: USB
+  permalink: /usb
+  description: USB 
