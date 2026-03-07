@@ -1,7 +1,7 @@
 ---
 slug: usb-repair
 title: USB Repair
-author: faiz_maulana_habibi
+# author: faiz_maulana_habibi
 tags: [usb]
 ---
 

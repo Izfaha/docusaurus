@@ -88,7 +88,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'DocuLog',
+        title: 'IzfahaDocs',
         logo: {
           alt: 'DocuLog by Izfaha',
           src: 'img/logo.svg',
@@ -151,7 +151,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} DocuLog, Inc. Made with love.`,
+        copyright: `Copyright © ${new Date().getFullYear()} IzfahaDocs, Inc. Made with love.`,
       },
       prism: {
         theme: prismThemes.github,

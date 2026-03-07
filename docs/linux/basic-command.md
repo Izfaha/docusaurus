@@ -89,87 +89,155 @@ $ ls -li
 
 ## 5. Add new user and group 
 
+### Groups
+- frontend => only accessing frontend dir.
+- backend => only accessing backend dir.
+- pm => pm (josh) accessing all dirs exclusively.
+- shared => accessing docs and database dirs for user frontend and backend, will be linked using `ln`. 
+- developer => for accessing main dir in `/home/linux/*`.
+
 Create group user for all team.
 
 ```sh
-$ sudo groupadd frontend
-$ sudo groupadd backend
-$ sudo groupadd pm
+sudo groupadd frontend
+sudo groupadd backend
+sudo groupadd pm
+sudo groupadd shared
+sudo groupadd developer
 ```
 
 Create user handling group.
 
 ```sh
 # frontend
-$ sudo useradd -m -G frontend rama
-$ sudo useradd -m -G frontend hanif
+$ sudo useradd -s /bin/bash -G frontend,shared,developer rama
+$ sudo passwd rama
+
+$ sudo useradd -s /bin/bash -G frontend,shared,developer hanif
+$ sudo passwd hanif
 
 # backend
-$ sudo useradd -m -G backend harry
-$ sudo useradd -m -G backend kacung
+$ sudo useradd -s /bin/bash -G backend,shared,developer harry
+$ sudo passwd harry
+
+$ sudo useradd -s /bin/bash -G backend,shared,developer kacung
+$ sudo passwd kacung
 
 # pm
-$ sudo useradd -m -G pm josh
-
-# give password for each user
-$ sudo passwd rama
-$ sudo passwd hanif
-$ sudo passwd harry
-$ sudo passwd kacung
+$ sudo useradd -s /bin/bash -G pm,shared,developer josh
 $ sudo passwd josh
-
-# switch new user
-$ su [user]
-# ex : $ su rama
-
-# check udentity 
-$ id
 ```
+
+:::note[Information]
+You can use these command to listing detailed information about your users.
+
+```sh
+# list users
+cat /etc/passwd | grep username
+# or `cut -d: -f1 /etc/passwd`
+
+# list groups
+cat /etc/group | grep groupname
+# or `cut -d: -f1 /etc/group`
+
+# see user's group
+groups username
+
+# detailed user info
+id username
+
+# show group info
+getent group
+```
+
+:::
 
 ## 6. Secure Ownership Directory 
 
-
 ```sh
-$ sudo chown root:frontend learn-cli/frontend
-
-$ sudo chown root:backend learn-cli/backend
-```
-
-Create group `shared` for database and docs dir.
-
-```sh
-$ sudo groupadd shared
-```
-
-Add all users to shared group.
-
-```sh
-$ sudo usermod -aG shared rama
-$ sudo usermod -aG shared hanif
-$ sudo usermod -aG shared harry
-$ sudo usermod -aG shared kacung
-$ sudo usermod -aG shared josh
+sudo chown root:frontend frontend
+sudo chown root:backend backend
 ```
 
 set ownership for docs and database dir for being accessed by user groped in `shared`.
 
 ```sh
-$ sudo chown root:shared learn-cli/docs
-$ sudo chown root:shared learn-cli/database
+sudo chown root:shared docs
+sudo chown root:shared database
+```
+
+Set user linux home directory accessible for other user.
+
+```sh
+sudo chown root:developer /home/linux
 ```
 
 Set group permission
 
 ```sh
-$ sudo chmod 770 learn-cli/backend 
-$ sudo chmod 770 learn-cli/frontend
-$ sudo chmod 770 learn-cli/docs
-$ sudo chmod 770 learn-cli/database
+sudo chmod 770 learn-cli/backend 
+sudo chmod 770 learn-cli/frontend
+sudo chmod 770 learn-cli/docs
+sudo chmod 770 learn-cli/database
+sudo chmod 770 /home/linux
 ```
 
-Add Josh as PM to `frontend` and `backend` group in order to grant permisson in those group.
+## 7. Verify the configuration
+
+### Frontend
+
+In this point measure that your main user has grant to group you have created. We will check using first user `rama` and `hanif` as frontend. Just hit these command.
+
+Try to switch ro `rama` user.
+```sh
+su rama
+```
+
+Accessing frontend dir and it must have an access to the dir. 
+```sh
+cd /home/linux/Documents/learn-cli/frontend 
+```
+
+If `rama` user try to access backend dir, it must be `permission denied`.
+```sh
+cd /home/linux/Documents/learn-cli/backend
+```
+
+Please repeating those but **don't forget to switch each user**.
+
+### Backend
+
+As mentioned that the backend role is filled by `harry` and `kacung` so test them using these commands.
 
 ```sh
-$ sudo usermod -aG frontend josh
-$ sudo usermod -aG backend josh 
+su harry
+```
+
+Accessing backend dir and it must have an access to the dir. 
+
+```sh
+cd /home/linux/Documents/learn-cli/backend
+```
+
+If `rama` user try to access backend dir, it must be `permission denied`.
+
+```sh
+cd /home/linux/Documents/learn-cli/frontend 
+```
+
+Please repeating those but **don't forget to switch each user**.
+
+### PM
+
+Project manager or (PM) should have an access to all dirs so make sure that you have given an group access to `josh`.
+
+```sh
+su josh
+```
+
+```sh
+cd /home/linux/Documents/learn-cli/frontend
+cd /home/linux/Documents/learn-cli/backend
+cd /home/linux/Documents/learn-cli/docs
+cd /home/linux/Documents/learn-cli/database
 ```
