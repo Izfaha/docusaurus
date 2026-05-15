@@ -7,7 +7,7 @@ tags: [linux, docusaurus]
 
 ## Installing PostgreSQL
 
-Install postgresql in your arch using 
+Install postgresql in your arch using
 
 ```sh
 sudo pacman -S postgresql php-pgsql apache
@@ -20,7 +20,7 @@ sudo systemctl start {postgresql,httpd}
 sudo systemctl status {postgresql,httpd}
 ```
 
-<!-- truncate -->
+`{/* truncate */}`
 
 It will look like this
 

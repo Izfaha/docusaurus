@@ -8,7 +8,7 @@ tags: [usb]
 ## Case
 
 ```
-Case : 
+Case :
 In this case I am currently facing my usb is in read-only mode permanently.
 
 this used command to have done :
@@ -18,7 +18,7 @@ this used command to have done :
 sudo bash Ventoy2Disk.sh -i /dev/sdb
 ```
 
-<!-- truncate -->
+`{/* truncate */}`
 
 output :
 
@@ -55,10 +55,10 @@ Write data to /dev/sdb failed, please check whether it's in use.
 
 ![dmesg](./img/hdparm.png)
 
-- run `hdparm` 
+- run `hdparm`
 
 ![hdparm](./img/hdparm.png)
 
-- run `dd` to verify 
+- run `dd` to verify
 
 ![dd](./img/dd.png)

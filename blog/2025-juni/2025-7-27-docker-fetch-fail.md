@@ -13,7 +13,7 @@ I have gotten an issue while attemting to build a Docker image with the followin
 docker build -t izfaha/express:v1 .
 ```
 
-<!-- truncate -->
+`{/* truncate */}`
 
 And I encountered this error:
 

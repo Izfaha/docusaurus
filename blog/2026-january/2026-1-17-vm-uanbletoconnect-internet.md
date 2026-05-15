@@ -2,7 +2,7 @@
 slug: vm-using-virtbr0-unable-to-connect-internet
 title: virtbr0 unable to Access the Internet
 authors: faiz_maulana_habibi
-tags: [linux, secure, network] 
+tags: [linux, secure, network]
 ---
 
 ## virtbr unable connecting to internet
@@ -11,7 +11,7 @@ tags: [linux, secure, network]
 
 Saat melakukan instalasi Ubuntu Server 25.10 menggunakan QEMU/KVM di host Arch Linux, Virtual Machine (VM) berhasil mendapatkan alamat IP melalui DHCP dari bridge virbr0, namun gagal mengakses internet (error Network Unreachable atau IGN pada tahap pemilihan mirror).
 
-<!-- truncate -->
+`{/* truncate */}`
 
 ![ubuntu](./img/ubuntu-qemu-virtbr0-unabel-connect-to-internet.png)
 
@@ -29,7 +29,8 @@ sudo virsh net-start default
 ip a show virbr0
 
 ```
-Di script ini pertama-tama akan mengaktifkan modul `tun` di system linux aku lalu membuat bridge `virtbr0` atau virtual bridge. 
+
+Di script ini pertama-tama akan mengaktifkan modul `tun` di system linux aku lalu membuat bridge `virtbr0` atau virtual bridge.
 
 :::note[Note]
 Sebelum menjalankan script dan VM, pastikan tambah rules di iptables untuk meloloskan packet data dari lewat di `virtbr0` atau virtual bridge, dengan command ini.
@@ -40,57 +41,57 @@ sudo iptables --list
 
 this is its output and will be distict in your system.
 
-``` showLineNumbers {5}
-# sudo iptables --list 
+```showLineNumbers {5}
+# sudo iptables --list
 Chain INPUT (policy ACCEPT)
-target     prot opt source               destination         
+target     prot opt source               destination
 
 Chain FORWARD (policy DROP)
-target     prot opt source               destination         
-ACCEPT     all  --  anywhere             anywhere            
-ACCEPT     all  --  anywhere             anywhere            
-DOCKER-USER  all  --  anywhere             anywhere            
-DOCKER-FORWARD  all  --  anywhere             anywhere            
+target     prot opt source               destination
+ACCEPT     all  --  anywhere             anywhere
+ACCEPT     all  --  anywhere             anywhere
+DOCKER-USER  all  --  anywhere             anywhere
+DOCKER-FORWARD  all  --  anywhere             anywhere
 
 Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination         
+target     prot opt source               destination
 
 Chain DOCKER (4 references)
-target     prot opt source               destination         
-DROP       all  --  anywhere             anywhere            
-DROP       all  --  anywhere             anywhere            
-DROP       all  --  anywhere             anywhere            
-DROP       all  --  anywhere             anywhere            
+target     prot opt source               destination
+DROP       all  --  anywhere             anywhere
+DROP       all  --  anywhere             anywhere
+DROP       all  --  anywhere             anywhere
+DROP       all  --  anywhere             anywhere
 
 Chain DOCKER-BRIDGE (1 references)
-target     prot opt source               destination         
-DOCKER     all  --  anywhere             anywhere            
-DOCKER     all  --  anywhere             anywhere            
-DOCKER     all  --  anywhere             anywhere            
-DOCKER     all  --  anywhere             anywhere            
+target     prot opt source               destination
+DOCKER     all  --  anywhere             anywhere
+DOCKER     all  --  anywhere             anywhere
+DOCKER     all  --  anywhere             anywhere
+DOCKER     all  --  anywhere             anywhere
 
 Chain DOCKER-CT (1 references)
-target     prot opt source               destination         
+target     prot opt source               destination
 ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED
 ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED
 ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED
 ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED
 
 Chain DOCKER-FORWARD (1 references)
-target     prot opt source               destination         
-DOCKER-CT  all  --  anywhere             anywhere            
-DOCKER-INTERNAL  all  --  anywhere             anywhere            
-DOCKER-BRIDGE  all  --  anywhere             anywhere            
-ACCEPT     all  --  anywhere             anywhere            
-ACCEPT     all  --  anywhere             anywhere            
-ACCEPT     all  --  anywhere             anywhere            
-ACCEPT     all  --  anywhere             anywhere            
+target     prot opt source               destination
+DOCKER-CT  all  --  anywhere             anywhere
+DOCKER-INTERNAL  all  --  anywhere             anywhere
+DOCKER-BRIDGE  all  --  anywhere             anywhere
+ACCEPT     all  --  anywhere             anywhere
+ACCEPT     all  --  anywhere             anywhere
+ACCEPT     all  --  anywhere             anywhere
+ACCEPT     all  --  anywhere             anywhere
 
 Chain DOCKER-INTERNAL (1 references)
-target     prot opt source               destination         
+target     prot opt source               destination
 
 Chain DOCKER-USER (1 references)
-target     prot opt source               destination         
+target     prot opt source               destination
 ```
 
 `Policy DROP`: Berarti "Larang semua data lewat kecuali ada aturan khusus".
@@ -103,7 +104,7 @@ virbr0: Karena belum ada aturan khusus yang mengizinkan virbr0, maka installer U
 sudo iptables -I FORWARD -o virbr0 -j ACCEPT
 sudo iptables -I FORWARD -i virbr0 -j ACCEPT
 
-# cativate IP Forwarding 
+# cativate IP Forwarding
 sudo sysctl -w net.ipv4.ip_forward=1
 ```
 

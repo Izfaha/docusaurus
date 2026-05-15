@@ -2,7 +2,7 @@
 slug: pipewire
 title: PipeWire Installation Arch
 authors: faiz_maulana_habibi
-tags: [linux, secure] 
+tags: [linux, secure]
 ---
 
 ## Installation on Arch Linux
@@ -20,7 +20,7 @@ sudo pacman -Rns pulseaudio
 sudo pacman -S pipewire wireplumber pipewire-pulse pipewire-alsa
 ```
 
-<!-- truncate -->
+`{/* truncate */}`
 
 ## Enable it
 
@@ -30,7 +30,7 @@ Run with no sudo because dbus run in tty.
 systemctl --user enable --now pipewire pipewire-pulse wireplumber
 ```
 
-## Verify service 
+## Verify service
 
 ```sh
 systemctl --user status pipewire

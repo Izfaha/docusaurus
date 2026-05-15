@@ -1,11 +1,11 @@
 ---
 slug: docusaurus
-title: File Error 
+title: File Error
 authors: faiz_maulana_habibi
 tags: [linux, docusaurus]
 ---
 
-<!-- truncate -->
+`{/* truncate */}`
 
 ## Docusaurus : get error after temoving file inside '/blog'
 

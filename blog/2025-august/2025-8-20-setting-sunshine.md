@@ -1,8 +1,8 @@
 ---
 slug: sunshine
-title: Sunshine Game Stream 
+title: Sunshine Game Stream
 authors: faiz_maulana_habibi
-tags: [linux, secure] 
+tags: [linux, secure]
 ---
 
 ## Installation Using Pacman
@@ -17,7 +17,7 @@ systemctl --user start sunshine # if you need to start on boot just using `syste
 sunshine            # <= this is a command
 ```
 
-<!-- truncate -->
+`{/* truncate */}`
 
 You will see line bellow
 ![Sunshine Run](./img/sunshine.png)

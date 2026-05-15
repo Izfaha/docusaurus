@@ -12,7 +12,7 @@ This bash script will create a switch name `br0-lan` type bridge and taps name '
 - ```tap 0``` for CHR.
 - ```tap 1``` for freeradius server.
 - ```tap 2``` for client (Debian).
-<!-- ```tap 3``` for client (Arch GUI). -->
+{/* truncate */}
 
 ```sh
 #!/bin/bash

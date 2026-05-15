@@ -2,16 +2,16 @@
 slug: docker-daemon-issue
 title: Cannot connect to the Docker daemon
 authors: faiz_maulana_habibi
-tags: [linux, secure] 
+tags: [linux, secure]
 ---
 
-## Issue 
+## Issue
 
-Recently, I was trying build docker image but it become an issue. Pop in my terminal up a messege. 
+Recently, I was trying build docker image but it become an issue. Pop in my terminal up a messege.
 
 ![issue](./img/docker-issue.jpeg)
 
-<!-- truncate -->
+`{/* truncate */}`
 
 The main issue is I used wrong docker path in `docker context`. In my case, I remain using docker desktop path.
 

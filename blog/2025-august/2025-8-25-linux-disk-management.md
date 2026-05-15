@@ -1,8 +1,8 @@
 ---
 slug: disk-management
-title: Linux Disk Management 
+title: Linux Disk Management
 authors: faiz_maulana_habibi
-tags: [linux, secure] 
+tags: [linux, secure]
 ---
 
 # Linux Disk Management (lsblk, mount, umount, format, wipe)
@@ -15,7 +15,7 @@ Gunakan `lsblk` untuk melihat daftar device dan filesystem:
 lsblk -f
 ```
 
-<!-- truncate -->
+`{/* truncate */}`
 
 ```sh
 NAME        FSTYPE FSVER LABEL    UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
@@ -30,7 +30,9 @@ nvme0n1
 ├─nvme0n1p3
 └─nvme0n1p4 ntfs         OS       5A360D4B360D2A19
 ```
+
 ## Format Disk
+
 In linux, ensure the package is available.
 
 ```sh
@@ -98,12 +100,7 @@ Mount dengan opsi:
 sudo mount -t vfat -o uid=1000,gid=1000,umask=022 /dev/sdb1 /mnt/usb
 ```
 
-Opsi penting:
-    - ro → read-only
-    - rw → read-write
-    - noexec → cegah eksekusi file biner
-    - nosuid → abaikan SUID/SGID
-    - nodev → abaikan device file
+Opsi penting: - ro → read-only - rw → read-write - noexec → cegah eksekusi file biner - nosuid → abaikan SUID/SGID - nodev → abaikan device file
 
 Mount berdasarkan UUID / LABEL:
 
@@ -133,7 +130,7 @@ sudo wipefs -a /dev/sdb
 ```
 
 Overwrite awal disk (100MB pertama):
- 
+
 ```sh
 sudo dd if=/dev/zero of=/dev/sdb bs=1M count=100
 ```
