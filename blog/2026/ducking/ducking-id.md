@@ -41,7 +41,7 @@ Setelah semua barang terkonsolidasi dan siap diberangkatkan, estimasi waktu perj
 | **Jalur Udara** | **7 – 14 Hari Kerja** *(sejak keberangkatan)* | Proses jauh lebih cepat, namun biaya (ongkir) cenderung lebih mahal. |
 | **Jalur Laut** | **4 – 6 Minggu** *(sejak keberangkatan)* | Biaya jauh lebih murah, namun estimasi lama, rentan antrean manifes, dan rawan risiko barang hilang. |
 
-:::warning Faktor Eksternal
+:::warning
 Estimasi di atas dapat berubah (tertunda) jika terjadi situasi khusus seperti **Hari Raya Imlek (Chinese New Year)** atau **cuaca buruk** di jalur pelayaran/penerbangan.
 :::
 
