@@ -16,7 +16,7 @@ faiz_maulana_habibi:
   name: Fa'iz Maulana Habibi
   title: College Student of Dian Nuswantoro University
   url: https://github.com/Izfaha
-  image_url: https://github.com/JoelMarcey.png 
+  image_url: /img/authors/faiz.jpg 
   page:
     # customize the url of the author page at /blog/authors/<permalink>
     permalink: '/all-faiz_maulana_habibi-articles'
