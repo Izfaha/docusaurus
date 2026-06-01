@@ -1,6 +1,6 @@
 ---
-sidebar_title: Kubernetes LAB
-sidebar_position: 3
+sidebar_title: Kubernetes 
+sidebar_position: 2
 ---
 
 # Kubernetes LAB

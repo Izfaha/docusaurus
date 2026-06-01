@@ -1,6 +1,6 @@
 ---
 sidebar_title: Get start to Kubernetes
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # Get start to Kubernetes

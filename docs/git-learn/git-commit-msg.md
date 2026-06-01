@@ -8,7 +8,7 @@ sidebar_title: Sematic Commit Message
 
 The Conventional Commits spesification is a lightweight convention on top of commit messages, providing a set of rules for creating an explisit commit history.
 
-:::note [language]
+:::note[language]
 (n) convention = konvensi = kesepakatan (kbbi).\
 (v) dovetail = selaras.
 :::
