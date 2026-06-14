@@ -1,6 +1,6 @@
 ---
 sidebar_title: Docker practice lab tutorial
-sidebar_position: 4
+# sidebar_position: 4
 ---
 
 # Docker labs
