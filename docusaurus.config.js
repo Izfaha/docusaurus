@@ -10,8 +10,9 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'DocuLog',
-  tagline: 'The journey of a thousand miles begins with a single step.',
+  // title on homepage
+  title: 'Fa\'iz Maulana Habibi',
+  tagline: 'Bridging infrastructure, security, and the low-level stack. Passionate about Linux internals, breaking things to understand how they work, and automating the rest. Always tinkering beneath the abstraction layer.',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -88,9 +89,9 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'IzfahaDocs',
+        title: 'Izfaha',
         logo: {
-          alt: 'DocuLog by Izfaha',
+          alt: 'Documentation by Izfaha',
           src: 'img/logo.svg',
         },
         items: [
@@ -151,7 +152,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} IzfahaDocs, Inc. Made with love.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Documentation by Izfaha, Inc. Made with love.`,
       },
       prism: {
         theme: prismThemes.github,
