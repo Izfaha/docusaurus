@@ -4,7 +4,6 @@ date: 2026-05-22
 description: Panduan lengkap alur pengiriman barang impor dari China ke Indonesia melalui buying agent (Ducking ID), mulai dari proses lokal China, jalur pengiriman, hingga custom clearance (Bea Cukai).
 slug: alur-pengiriman-import-china
 authors: faiz_maulana_habibi
-tags: [logistics, import]
 keywords: [data, ssd, forensic, recover, windows, storage, buying agent, china, forwarder, 1688, taobao]
 # image: ./img/access-denied-windows.jpeg
 hide_table_of_contents: false
