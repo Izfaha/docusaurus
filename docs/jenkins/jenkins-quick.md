@@ -66,4 +66,4 @@ Kurang lebihnya sesuai seperti ss diatas, jika ada pertanyaan bisa ditanyakan ke
 
 ## Post Createing Pipeline
 
-Setelah buat 
+Setelah mengatur configurasi kita perlu buat Jenkinsfile yg dibaca oleh Jenkins agent nya dan juga merapikan Dockerfile dan docker-compose untuk production.
