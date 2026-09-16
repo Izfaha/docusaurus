@@ -32,17 +32,78 @@ chmod +x yourqemuconf.sh
 
 ## Boot Proccess 
 
+This is GRUB menu, just direct on `Try or Install Ubuntu` then pres `e`.
+
+![grub](./img/grub.png)
+
+You will be presented `GRUB boot entry editor`.
+
 ![boot](./img/qemu-ubuntu.jpg)
 
 Img above shows how to boot using ttyS0 inside terminal itself.
 
-The step is when GRUB appeares press `e` then add `console=ttyS0,115200n8` like this :
+Then add `console=ttyS0,115200n8` before `---`. Like this :
 
 ```sh
-linux    /casper/vmlinuz --- console=ttyS0,115200n8
+linux    /casper/vmlinuz console=ttyS0,115200n8 ---
 ```
 
-Then Ctrl + X to boot. 
+FYI : 
+- `console=ttyS0` : tells ubuntu to boot on first serial port (`ttyS0`) connected to qemu terminal.
+- `1155200` : the speed of serial communication.
+- `n8` : without parity, and with 8 bit data.
+
+
+![grub-entry-editor](./img/entry-editor-grub.png)
+
+Then Ctrl + X or F10 to boot. 
+
+## Ubuntu installation in serial terminal (Qemu)
+
+This is ubuntun server installer's serial-console mode selection, means `console=ttyS0,115200n8` setup worked.
+
+Choose `Continue in rich mode` cuz we need colour lol.
+
+![installer-serial](./img/installer-serial-console-mode-selection.png)
+
+Then press enter.
+
+and do the installation proccess as your desire. 
+
+## Activate Serial Monitor after installation
+
+Login to your username, check grub with this command :
+
+```
+sudo nano /etc/default/grub
+
+```
+
+![grub-config](./img/etc-default-grub.png)
+
+add variable `GRUB_CMDLINE_LINUX="console=ttyS0,115200n8"` on /etc/default/grub.
+
+![add-serial-conf](./img/add-serial-conf.png)
+
+## Update Grup
+
+Update grub to apply boot configuration with command :
+
+```
+sudo update-grub
+```
+
+![update-grub](./img/update-grub.png)
+
+```
+sudo systemctl enable --now serial-getty@ttyS0.service
+```
+
+Serving login prompt via serial.
+
+![serial-login](./img/enable-login-via-serial-on-teriminal.png)
+
+then `reboot`.
 
 ## Resize LVM Ubuntu
 
