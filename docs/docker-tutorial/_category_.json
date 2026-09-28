@@ -1,6 +1,5 @@
 {
   "label": "Docker",
-  "position": 10,
   "collapsed": true,
   "className": "docker-tutorial",
   "link": {

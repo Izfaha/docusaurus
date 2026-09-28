@@ -1,6 +1,5 @@
 {
   "label": "AES - Advance Encryption Standart",
-  "position": 18,
   "collapsed": true,
   "className": "aes-encryption",
   "link": {

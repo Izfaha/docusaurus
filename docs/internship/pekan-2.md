@@ -1,0 +1,414 @@
+# Pekan 2 - Administrasi Linux dan Git dasar
+
+## Persiapan di semua VM
+
+Pertama pasang semua ip static host-only **di semua VM**, dengan memasukannya ke dalam `/etc/hosts`.
+
+```
+# host-only
+192.168.56.10 manager1
+192.168.56.11 worker1
+192.168.56.12 worker2
+192.168.56.13 infra
+```
+
+![etc-hosts](./img/pekan-2/pasang-ip-static-host-only-di-semua-vm.png)
+
+> [!Note]
+> Ini digunakan agar antar VM bisa saling mengenali, contoh dari vm manager1 mau ssh ke worker1, dari pada `ssh ubuntu@192.168.56.11` lebih baik memakai nama seperti ini `ssh ubuntu@worker1`.
+
+Selanjut nya kita perlu meng update repository **di semua VM** dulu dengan menjalankan command :
+
+```
+sudo apt update
+```
+
+![update-repo](./img/pekan-2/update-di-semua-vm.png)
+
+Lalu install rcyn cron lvm2 ssh-server git :
+
+```
+sudo apt install rsync openssh-server cron lvm2 git
+```
+
+![install](./img/pekan-2/install-rsync-git-etc.png)
+
+Ternyata semua depedency sudah terinstall semua.
+
+Sekarang saya check cronjob nya dengan command :
+
+```
+systemctl status cron
+```
+
+![check-cron](./img/pekan-2/check-cron.png)
+
+Untuk memastikan vm bisa di remote, saya mengecheck dengan command :
+
+```
+systemctl status ssh.service ssh.socket --no-pager
+```
+
+![cek-ssh](./img/pekan-2/check-ssh-service-dan-socket.png)
+
+> [!NOTE]
+> Untuk kenapa command saya tanpa sudo, saya sudah menjalankan `sudo su` sebelumnya...
+
+### systemd, journalctl, user/group/permission, cron, manajemen disk dan LVM dasar, bash scripting.
+
+#### systemd dan journalctl
+
+Systemd adalah sistem dan servis manager untuk modern linux os, memulai sistem, manage service dan mengontrol resource system selama proses runtime. Sebelum systemd itu ada sysV init.
+
+Ada beberapa utility utama systemd :
+
+|Utility|Deskripsi|
+|-----|----|
+|systemctl|mengontrol service dan unit (start, stop, enable, disable, status)|
+|journalctl|mengakses log sistem yg di maintain oleh systemd dan sudah support filtering by service, time, atau prioritas|
+|hostnamectl|mengkonfigurasi sistem hostname secara dinamik/berubah-ubah|
+|localctl|mengatur lokasi sistem dan layout keyboard|
+|timedatectl|mengatur waktu, tanggal, dan timezon sistem|
+|systemd-cgls|menampilkan hierarki dari cgroups untuk proses yg berjalan|
+|systemadm|menyediakan interface simple untuk mengatur service menggunakan systemctl|
+
+sekarang di VM `manager1` saya akan mencoba membuat service cron sendiri :
+
+Saya membuat file `/etc/systemd/system/lab-report.service` dan memasukan config ini.
+Config ini hanya mencatat pesan ke journalctl aja nggak lebih.
+
+```
+[Unit]
+Description=Latihan mencatat pesan ke journal
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/logger -t week02-lab "Latihan systemd berhasil dijalankan"
+```
+
+Untuk isi dari lab-report.service nya kurang lebih seperti ini :
+- `[Unit]` : bagian informasi unit seperti deskripsi dan depedensi.
+- `[Service]` : bagian yang mengatur cara pekerjaan di jalankan.
+- `/usr/bin/logger` : program untuk mengirim pesan ke system logging.
+- `-t` : untuk memberikan tag agar mudah dicari, dalam case ini tag nya `week02-lab`.
+- `Latihan systemd berhasil dijalankan` : ini adalah pesan yg harus dicatat dan akan ditampilkan di journalctl loggind dan kita yg menentukan sendiri.
+
+![systemd](./img/pekan-2/file-lab-report-service-systemd.png)
+
+Setelah itu harus meminta si systemd nya untuk membaca unit baru, dengan command :
+
+```
+sudo systemctl daemon-reload
+```
+
+![start-lab-report](./img/pekan-2/start-service-lab-report.png)
+
+> [!NOTE]
+> Command `sudo systemctl daemon-reload` hanya di jalankan ketika membuat service systemd atau ada unit baru yg di buat.
+
+Ketika melihat di `journalctl` akan kelihatan pesan `Latihan systemd berhasil di jalankan.`
+
+![journalctl-log](./img/pekan-2/log-systemd-service-lab-report.png)
+
+#### User, group, dan permission
+
+Sekarang akan belajar tentang management user, group, dan permission.
+Untuk pembuatan user group dan permission saya akan memakai VM 2 yaitu worker1.
+
+saya akan membuat user faiz dan group devops.
+
+Pembuatan group `devops` :
+
+```
+sudo groupadd devops
+```
+
+![create-user-devops](./img/pekan-2/creating-group-devops.png)
+
+Pembuatan user `faiz` :
+
+```
+sudo adduser faiz
+```
+
+![create-user-faiz](./img/pekan-2/create-user-faiz.png)
+
+> [!NOTE]
+> Disini saya sudah membuat user `faiz` tapi belum masuk group `devops`
+
+Sekarang saya akan menambahkan user `faiz` ke group `devops`.
+
+```
+sudo usermod -aG devops faiz
+```
+
+![add-faiz-to-devops](./img/pekan-2/add-faiz-to-devios.png)
+
+ini adalah rincian lengkap uid dan gid dari user faiz.
+
+![id-faiz](./img/pekan-2/id-faiz.png)
+
+Sekarang saya akan membuat direktori `/srv/project-lab` dan membuat file `note.txt`.
+
+```
+sudo install -d -o root -g devops -m 2770 /srv/project-lab
+```
+
+disini saya membuat dir `/srv/project-lab` dengan kepemilikan root `-o root` dan group devops `-g devops` dengan permission read,write,execute untuk user dan group.
+
+![srv](./img/pekan-2/srv-project-lab-dir.png)
+
+Pembuatan file `note.txt` :
+
+```
+su - faiz bash -c 'umask 007;printf "catatan permission" > /srv/project-lab/note.txt'
+```
+command ini termasuk baru bagi saya, pemahaman saya kurang lebih nya seperti ini, jalan kan command dengan user `faiz` pake bash `bash -c '...'`, didalam bash itu ada command untuk atur permission default untuk file baru dan memperbolehkan `owner` dan `group` untuk mengakses dan `others` tidak boleh akses file `note.txt`.
+
+![note](./img/pekan-2/create-file-note-on-srv-project-lab.png)
+
+#### Membaca kondisi disk dan berlatih LVM
+
+Source [lvm](https://medium.com/@habibullah.127.0.0.1/what-is-lvm-lvm-architecture-how-to-create-pvs-vgs-lvs-in-linux-30acd24e4f0b).
+
+- Buat Image di `/var/tmp`.
+
+![img](./img/pekan-2/lvm-img.png)
+
+Ini dalah image yg saya buat untuk buat latihan sementara.
+
+- Buat Physical Volume (PV)
+
+```
+sudo pvcreate /dev/loop0
+```
+
+- Buat Volume Group
+
+```
+sudo vgcreate vg_week02_lab /dev/loop0
+```
+
+Jadi kita buat volume group yg kita ikat ke /dev/loop0.
+
+![vg](./img/pekan-2/buat-volume-group.png)
+
+- Buat Logical Volume
+
+```
+sudo lvcreate -L 256M -n configs vg_week02_lab
+```
+
+![create-lv](./img/pekan-2/create-logical-volume.png)
+
+- Buat file system ext4 (vg_week02_lab)
+
+```
+sudo mkfs.ext4 /dev/vg_week02_lab
+```
+
+![ext4](./img/pekan-2/create-file-system-ext4.png)
+
+Kita langsung buat folder untuk nge-mount si `/dev/vg_week02_lab`.
+
+```
+sudo mkdir -p /mnt/week02-lvm
+```
+
+![mount](./img/pekan-2/hasil-mount.png)
+
+Jika mau buat LVM, kita harus cemat terhadap step-by-step pembuatan nya, yaitu :
+
+Pertama, harus membuat Physical Volume atau raw storage yg terbuat dari hdd/ssd contoh : /dev/sda, /dev/sdb. etc.
+
+Kedua, membuat Volume Group yg dari Physical Volume.
+
+Ketiga, membuat logical volume dari Volume Group.
+
+:::note
+Dasar Flow LVM nya kurang lebih seperti ini Storage > Physical Volume > Volume Group > Logical Volume. 
+:::
+
+### Bash Scripting
+
+Bash kepanjangan dari Bourne Again Shell, default shell pada banya distribusi linux dan telah di standarisasi pada macOs juga bahkan bis di jalankan di windown melalui WSL. Saya pribadi agak bingung untuk apa yg harus saya tulis di dokumentasi ini karena di dokumentasi sebelumnya sudah manyinggung beberapa bash script juga.
+
+Cuman yang aku fahami tentang bash script itu adalah keunikan nya, contoh kalo mau memunculkan text itu pake `echo` tapi kalo ada karakter khusus seperti `\n` atau `\t` harus ditambahkan `echo -e`. Meskipun lebih simple dari bahasa pemrogramman saya sampai sekarang masih agak sulit ketika membuat flow bash script manual / hard code programming.
+
+### Git: init, commit, branch, merge, rebase dasar, menyelesaikan conflict.
+
+
+
+### Buat repo dokumentasi magang di GitHub dan GitLab (mirror) dengan folder per pekan.
+
+*Masih menunggu GitLab Dinustek*
+
+### Sepakati format commit (Conventional Commits) dan template laporan pekana
+
+Saya terkadang menggunakan format Conventional Commits ketika mau push ke github/gitlab. Jenis commit yang dipakai:
+
+- docs: menambah atau memperbarui dokumentasi
+- feat: menambah fitur atau script
+- fix: memperbaiki kesalahan
+- chore: pekerjaan pemeliharaan
+
+Contoh:
+- docs(week-02): catat latihan administrasi Linux
+- feat(backup): tambah backup konfigurasi manager1 ke infra
+- fix(backup): perbaiki koneksi SSH pada script backup
+- chore(cron): jadwalkan backup harian
+
+Satu commit berisi satu perubahan. cuman yang sering saya gunakan cuman feat, fix sama docs.
+
+### DevOps - Script backup direktori konfigurasi ke VM infra memakai rsync dan cron, lengkap dengan log hasil.
+
+#### Rsync
+
+Rsync adalah toole untilty untuk sistem Unix-Like, fungsinya mengsinkronkan file dan direktori antar 2 host atau machine. Menggunakan algoritma delta-transfer untuk mengirim data dan juga bisa mengirim melalui ssh.
+
+#### Cronjob
+
+**Create User for Rsync (VM Infra)**
+
+I create user for rsync in *vm infra*, i will use this user to do backup job via ssh.
+
+```
+sudo useradd --disabled-password --gecos "" backupmgr
+```
+
+![user-backup](./img/pekan-2/creat-user-for-rsync.png)
+
+Now, we need to create dirs for backup, in this case I will create on `/var/backup/manager1`.
+
+```
+sudo install -d -o backupmgr -g backupmgr -m 0700 /var/backups/manager1
+```
+
+This command tells that we create directory name `backupmgr` group on `backupmgr` and permission write, read and execute for user `backupmgr` on dir `/var/backups/manager1`.
+
+![bacups-file](./img/pekan-2/file-var-backups.png)
+
+**Create SSH key (VM manager1)**
+
+Generate ssh key on manager1, using `ssh-keygen`.
+
+
+```
+sudo ssh-keygen -t ed25519 -f /root/.ssh/id_ed25519_backup_infra -N '' -C 'manager1-backup-to-infra'
+```
+
+:::note
+`-t` is type of hash algorithm and `-f` is where key should be located and `-N` means no passphrase when login `-C` for comment.
+:::
+
+![sshkey](./img/pekan-2/gen-sshkey-on-manager1.png)
+
+**Create .ssh directory (VM infra)**
+
+Create .ssh dir to save the key of manager1 vm in `known_host` vm infra.
+
+
+```
+sudo install -d -o backupmgr -g backupmgr -m 0700 /home/backupmgr/.ssh
+```
+
+![create-on-vm](./img/pekan-2/create-dot-ssh-on-vm-infra.png)
+
+**Daftarkan Key public vm manager1 ke vm infra user `backupmgr`**
+
+on VM infra 
+
+```
+sudo -u backupmgr sh -c 'umask 077; nano /home/backupmgr/.ssh/authorized_keys'
+```
+
+![copy-key-from-manager1](./img/pekan-2/copy-keys-from-vm-manager.png)
+
+then paste your public key in vm manager1 to infra on nano and don't forget to add `from="192.168.56.10",restrict`.
+
+**Catat Sidik Jari Host (VM infra)**
+
+Run this command from VM infra to verify the key of vm manager1
+
+```
+sudo ssh-keygen -l -f /etc/ssh/ssh_host_ed25519_key.pub
+```
+
+![catat-sidik-jari](./img/pekan-2/sidik-jari-host.png)
+
+Let's try connection between 2 vms.
+
+```
+sudo ssh -i /root/.ssh/id_ed25519_backup_infra -o IdentitiesOnly=yes -o PasswordAuthentication=no backupmgr@192.168.56.13 'whoami'
+```
+
+![cek-whoami-ssh](./img/pekan-2/cek-woami-ssh.png)
+
+:::warning
+Jika `Permission Denied` cek kembali apakah key vm manager1 nya sudah dimasukan ke known_host di vm infra.
+:::
+
+**Cek Connection dari VM manager1 ke VM infra memakai rsyn (VM manager1)**
+
+saya akan mencoba mengetek koneksi memakai rsync, mengcopy `/etc/netplan/` dari vm manager1 ke vm infra.
+
+```
+sudo rsync -a --no-owner --no-group --dry-run --itemize-changes -e 'ssh -i /root/.ssh/id_ed25519_backup_infra -o IdentitiesOnly=yes -o BatchMode=yes' /etc/netplan/ backupmgr@192.168.56.13:/var/backups/manager1/netplan/
+```
+
+![cek-koneksi](./img/pekan-2/cek-using-rsync.png)
+
+Ini akan meng-sinkronkan `/etc/netplan/` dari vm manager1 ke `/var/backups/manager1/` di vm infra. `--dry-run` ini cuman tes koneksi aja nggak sampe mengirim file. `--itemize-changes` menampilkan item apa aja yg akan disalin. `--no-group` dan `--no-owner` membuat salinan file atau dir tetap di miliki oleh user `backupmgr` dan group `backupmgr` bukan menetapkan kepemilikan ke `root`.
+
+Ini adalah hasil dari backup manager1 ke infra :
+
+[backup-berhasil](./img/pekan-2/backup-rsync-berhasil.png)
+
+**Pembuatan Script Bash untuk Rsync (VM1 manager1)**
+
+Ini saya akan membuat bash script di `/usr/local/sbin/backup-manager1-config.sh` untuk mengotomasi job nya.
+
+```sh
+#!/usr/bin/env bash
+set -euo pipefail
+umask 077
+
+exec >>/var/log/backup-manager1.log 2>&1
+trap 'rc=$?; printf "%s selesai, exit=%s\n" "$(date -Is)" "$rc"' EXIT
+
+exec 9>/run/lock/backup-manager1.lock
+flock -n 9
+
+stamp="$(date +%Y%m%d-%H%M%S)"
+dest="/var/backups/manager1/runs/$stamp"
+remote="backupmgr@192.168.56.13"
+ssh_cmd="ssh -i /root/.ssh/id_ed25519_backup_infra -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes"
+
+printf '%s mulai backup ke %s\n' "$(date -Is)" "$dest"
+$ssh_cmd "$remote" "mkdir -p -m 0700 '$dest'"
+
+rsync -a --no-owner --no-group --chmod=D700,F600 --itemize-changes \
+  -e "$ssh_cmd" \
+  /etc/netplan/ "$remote:$dest/netplan/"
+
+printf '%s backup berhasil\n' "$(date -Is)"
+```
+
+![bash](./img/pekan-2/bash-rsync.png)
+
+Pastikan untuk add permission `execute` ke script bash (backup-manager1-config.sh) nya.
+
+**Pembuatan Cronjob (VM1 manager1)**
+
+disini saya membuat cronjob conf di `/etc/cron.d/manager1-backup`.
+
+```
+1 * * * * root /usr/local/sbin/backup-manager1-config.sh
+```
+
+Itu akan backup setiap 1 detik sekali tapi juga pastikan permission `manager1-backup` nya udah 644 yaitu `write` and `read` untuk `user` dan `read` untuk `group` dan `others`.
+
+![cronjob](./img/pekan-2/cron.png)
+
+![cronjob-berhasil](./img/pekan-2/cron-daemon.png)
+
