@@ -18,7 +18,7 @@ custom_fields:
 Recently I felt suprisingly amazed about what i found, maybe not something special for you guys. sorry :p.
 I wonder could I access local ip proxmox from different network? let say my local proxmox ip is `192.168.24.156:8006` yes does not have public ip, it can only access on my lab local internet `192.168.24.0/24`. Something came up suddenly when I woke up from my sleep "could I access my proxmox in lab from my home?" then I got an ide that I have Jetson nano with private ip using tailscale so I tried to create a tunnel using ssh.
 
-{/* image using html tag `img` */}
+{/* truncate */}
 
 <img
   src={require('./img/topology.png').default}
