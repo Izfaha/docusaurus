@@ -140,7 +140,49 @@ docker stats untuk menampikan penggunaan resource pada suatu container mulai dar
 
 ## Volume (named vs bind mount) dan network (bridge, host, none, user-defined bridge).
 
+Selain itu Docker juga memiliki komponen penting lainya yaitu volume dan network yang akan di implementasikan pada setiap containernya. Dalam production kedua componen ini adalah backbone pada semua aplikasi yg kita pake, Docker volume untuk menyipan data aplikasi dan untuk Docker network untuk menyambungkan 1 service dengan service lainnya dalam server. 
+
 ### Volume - named volume and bind mount
+
+#### Named Volume
+
+Skema pertama adalah named volume yg sepenuhnya pekerjaan penyimpanan data di manage oleh docker sendiri.
+Saya akan membuat **named volume** bernama `lab-vol` terlebih dahulu lalu saya attach ke nginx.
+
+```
+docker volume create lab-vol
+```
+
+![inspect-and-create-volume](./img/pekan-3/docker-vol-and-inspect.png)
+
+Selanjut nya saya akan meng-run nginx dan meng-attach ke volume `lab-vol`.
+
+```
+docker run --mount type=volume,source=lab-vol,target=/data -d nginx:stable-bookworm
+```
+
+![attach-vol](./img/pekan-3/run-nginx-attach-vol.png)
+
+Masuk ke container dan buat file `note.txt` didalam container `/data/note.txt`.
+
+```bash
+docker exec -it 1ab09bd09d8501820ceaa6f61663b7b253c0322894f8d23d0f52a117b44b281c bash
+
+# didalam container 
+ls
+
+cd data
+
+echo "ini file untuk test docker named volume" >> note.txt
+
+cat note.txt
+```
+
+![create-note.txt](./img/pekan-3/create-txt.png)
+
+#### Bind Mount
+
+Yang kedua adalah **Bind Mount** skema volum yg sepenuhnya dihandle oleh kita sendiri dan kita juga perlu menyiapkan direktori untuk di bind mount ke dalam container.
 
 ### Network - bridge, host, none and user-defined bridge
 
