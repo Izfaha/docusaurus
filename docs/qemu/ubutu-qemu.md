@@ -34,11 +34,11 @@ chmod +x yourqemuconf.sh
 
 This is GRUB menu, just direct on `Try or Install Ubuntu` then pres `e`.
 
-![grub](./img/grub.png)
+![grub](./img/grub.webp)
 
 You will be presented `GRUB boot entry editor`.
 
-![boot](./img/qemu-ubuntu.jpg)
+![boot](./img/qemu-ubuntu.webp)
 
 Img above shows how to boot using ttyS0 inside terminal itself.
 
@@ -54,7 +54,7 @@ FYI :
 - `n8` : without parity, and with 8 bit data.
 
 
-![grub-entry-editor](./img/entry-editor-grub.png)
+![grub-entry-editor](./img/entry-editor-grub.webp)
 
 Then Ctrl + X or F10 to boot. 
 
@@ -64,7 +64,7 @@ This is ubuntun server installer's serial-console mode selection, means `console
 
 Choose `Continue in rich mode` cuz we need colour lol.
 
-![installer-serial](./img/installer-serial-console-mode-selection.png)
+![installer-serial](./img/installer-serial-console-mode-selection.webp)
 
 Then press enter.
 
@@ -79,11 +79,11 @@ sudo nano /etc/default/grub
 
 ```
 
-![grub-config](./img/etc-default-grub.png)
+![grub-config](./img/etc-default-grub.webp)
 
 add variable `GRUB_CMDLINE_LINUX="console=ttyS0,115200n8"` on /etc/default/grub.
 
-![add-serial-conf](./img/add-serial-conf.png)
+![add-serial-conf](./img/add-serial-conf.webp)
 
 ## Update Grup
 
@@ -93,7 +93,7 @@ Update grub to apply boot configuration with command :
 sudo update-grub
 ```
 
-![update-grub](./img/update-grub.png)
+![update-grub](./img/update-grub.webp)
 
 ```
 sudo systemctl enable --now serial-getty@ttyS0.service
@@ -101,7 +101,7 @@ sudo systemctl enable --now serial-getty@ttyS0.service
 
 Serving login prompt via serial.
 
-![serial-login](./img/enable-login-via-serial-on-teriminal.png)
+![serial-login](./img/enable-login-via-serial-on-teriminal.webp)
 
 then `reboot`.
 
@@ -109,7 +109,7 @@ then `reboot`.
 
 ### Step 1 
 
-![lvm-pre](./img/lvm-34.png)
+![lvm-pre](./img/lvm-34.webp)
 
 This is my lvm before I extend it. How to extend? just hit this command :
 
@@ -121,7 +121,7 @@ for more usange and command, you can type `man lvextend` on terminal. Before typ
 
 ### Step 2
 
-![resize](./img/resize-filesystem.png)
+![resize](./img/resize-filesystem.webp)
 
 Do not forget to resize the filesystem.
 

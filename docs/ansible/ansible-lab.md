@@ -46,7 +46,7 @@ $ sudo add-apt-repository --yes --update ppa:ansible/ansible
 $ sudo apt install ansible
 ```
 
-![ansible-installation](./img/ansible-installation/install-ansible.png)
+![ansible-installation](./img/ansible-installation/install-ansible.webp)
 
 Next we need to verify installation and make sure it is completely done.
 
@@ -54,11 +54,11 @@ Next we need to verify installation and make sure it is completely done.
 ansible --version
 ```
 
-![checking-version](./img/ansible-installation/checking-version.png)
+![checking-version](./img/ansible-installation/checking-version.webp)
 
 And it's done, all path is set when you type `ansible` then press `Tab` it will show all ansible commands.
 
-![ansible](./img/ansible-installation/ansibel-core.png)
+![ansible](./img/ansible-installation/ansibel-core.webp)
 
 To use ansible as control node, we need to generate ssh-key to connect to managed nodes in this case means our VMs.
 We will use ssh key instead of password as it is not secure and can be attacked using bruteforce method.
@@ -74,7 +74,7 @@ In this, we still on our main user, my current user is `ubuntu` (on vm1 and vm2)
 
 Let's create our new user `ansible-svc` note that we do not login using password so need to use `--disabled-password` to tell system to login using ssh-key. `--gecos "Ansibel Automation Service"` we need to give some comment that easy to understand and `--verbose` to show all proccess output.
 
-![vm1-create-new-user-account](./img/vm1-config-ssh-key/vm1-create-user-for-ansible.png)
+![vm1-create-new-user-account](./img/vm1-config-ssh-key/vm1-create-user-for-ansible.webp)
 
 **2. Copy ssh-key of control node to managed nodes**
 

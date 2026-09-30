@@ -86,7 +86,7 @@ ifconfig || ip a
 
 1. Set IP Interface
 
-![IP list](./img/addres-list.png)
+![IP list](./img/addres-list.webp)
 
 2. Set hotspot
 
@@ -102,7 +102,7 @@ I establishes a new Hotspot instance within Mikrotik RouterOS on the `ether2` in
 /ip hotspot profile set use-radius=yes
 ```
 
-![hsprof](./img/hsprofile.png)
+![hsprof](./img/hsprofile.webp)
 
 3. Configure MikroTik to use FreeRADIUS
 

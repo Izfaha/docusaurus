@@ -9,18 +9,18 @@ sidebar_title: Jenkins
 Login jenkis doscom jenkins.doscom.org dan akan tampil halaman login :
 Untuk User dan Password nya bisa di tanyakan ke Tech Lead = Mas Fadhil Ryanto.
 
-![loginpage](./img/jenkins-login-page.png)
+![loginpage](./img/jenkins-login-page.webp)
 
 ## Cara Buat Pipeline
 
 Setelah login akan diarahkan ke Dashboard Jenkins :
 
-![dashboard](./img/jenkins-dashboard.png)
+![dashboard](./img/jenkins-dashboard.webp)
 
 klik `New Item` => isi `Enter an item name` dengan nama project (nama app atau web) dan pada 
 section `Select an item type` pilih `Organization Folder` => lalu klik `Ok`. 
 
-![create-pipeline](./img/create-pipeline.png)
+![create-pipeline](./img/create-pipeline.webp)
 
 Sementara kita hanya mengimplementasikan Pipeline untuk project kita. 
 Kenapa nggak `Multibrach Pipeline` karena resource server kita belum cukup untuk multiple build dan proses build
@@ -35,21 +35,21 @@ Setelah create project kita akan mengonfigurasi dan juga memberi tau Jenkins kit
 Sekarang Isi `Display Name` bisa di rubah atau di sesuaikan saja dengan nama item sebelumnya.
 Lalu `Description` bersifat opsional boleh di kosongkan atau di isi. 
 
-![display-and-description](./img/display-name-and-description.png)
+![display-and-description](./img/display-name-and-description.webp)
 
 ### Repository Sources
 
 Untuk `Project` => `Repository Sources` klik `+ Add` => `GitHub Organization` ini akan mengconnect kan jenkins dengan GitHub Doscom.
 
-![sources](./img/repository-sources.png)
+![sources](./img/repository-sources.webp)
 
-![github](./img/github-organization.png)
+![github](./img/github-organization.webp)
 
 ### GitHub Organization
 
 `Credential` pilih `DOSCOM GitHub App`
 
-![doscom-gh-page](./img/doscom-ghpage.png)
+![doscom-gh-page](./img/doscom-ghpage.webp)
 
 Untuk `Repository HTTPS URL` isi dengan repository yg di tuju.
 Untuk `Behaviors` pada `Discover branches` => `Strategy` isi dengan `Exclude brances that are also filled as PRs`.
@@ -58,7 +58,7 @@ Untuk `Filter by name (with wildcards) ` => `Include` isi dengan brach yg mau di
 
 Untuk `Property strategy` pilih `All branches get the same properties`.
 
-![doscom](./img/branch-resources.png)
+![doscom](./img/branch-resources.webp)
 
 untuk konfigurasi lainya biarkan default saja.
 

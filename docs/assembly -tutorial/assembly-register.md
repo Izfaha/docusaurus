@@ -11,6 +11,6 @@ Assembly is low level programming language.
 
 Assembly register cheatsheet.
 
-![Assembly Cheatsheet](./img/register-asm.png)
+![Assembly Cheatsheet](./img/register-asm.webp)
 
 For detail assembly read this github 1[Assembly Abbreviation](https://github.com/7etsuo/x86).

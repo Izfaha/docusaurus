@@ -29,7 +29,7 @@ EOF
 sudo apt update
 ```
 
-![docker-install-apt](./img/pekan-3/pasang-repo-list.png)
+![docker-install-apt](./img/pekan-3/pasang-repo-list.webp)
 
 ### Install the Docker packages.
 
@@ -47,7 +47,7 @@ Di bawah ini adalah beberapa kegunaan pada package above.
 |docker-buildx-plugin|Menambahkan docker buildx untuk membangun image dengan BuildKit. | Contoh : `docker buildx build -t namaimage:tag .`|
 |docker-compose-plugin|Menambahkan docker compose untuk multi container. | Contoh : `docker compose up`|
 
-![install-apt](./img/pekan-3/install-apt-docker.png)
+![install-apt](./img/pekan-3/install-apt-docker.webp)
 
 ---
 
@@ -64,7 +64,7 @@ Ini adalah beberapa command dalam docker image
 docker images
 ```
 
-![image-list](./img/pekan-3/image-list.png)
+![image-list](./img/pekan-3/image-list.webp)
 
 Semua image tersebut memiliki ukuran dan size nya di pengaruhi oleh layer dan file-file didalamnya.layer adalah hasil perubahan filesystem dari instruksi tertentu.
 
@@ -73,7 +73,7 @@ Semua image tersebut memiliki ukuran dan size nya di pengaruhi oleh layer dan fi
 docker image history traefik:v3.6
 ```
 
-![layer](./img/pekan-3/layer-traefik.png)
+![layer](./img/pekan-3/layer-traefik.webp)
 
 :::note
 dalam `docker images` diatas saya menggunakan homelab server saya sendiri. 
@@ -97,11 +97,11 @@ docker image history nginx:stable-bookworm
 docker run --name ngin_server -p 8080:80 nginx:stable-bookworm
 ```
 
-![nginx](./img/pekan-3/nginx-docker-run.png)
+![nginx](./img/pekan-3/nginx-docker-run.webp)
 
 Sekarang cek nginx di browser `192.168.58.10:8080` kenapa tidak 80? karena saya pointing port 80 yg didalam container ke port 8080 yg berada di host. 
 
-![nginx](./img/pekan-3/nginx-browser.png)
+![nginx](./img/pekan-3/nginx-browser.webp)
 
 **docker exec**
 
@@ -114,7 +114,7 @@ docker exec -it nginx_server bash
 Untuk `-it` memastikan kita bisa open pseudo-tty dan menginputkan command didalamnya.
 :::
 
-![docker-exec-nginx](./img/pekan-3/docker-exec-nginx-container.png)
+![docker-exec-nginx](./img/pekan-3/docker-exec-nginx-container.webp)
 
 Didalam container kita juga bisa menjalankan command command, seperti melihat file/directory etc.
 
@@ -122,19 +122,19 @@ Didalam container kita juga bisa menjalankan command command, seperti melihat fi
 
 `docker logs` berfungsi untuk melihat logs dari container yg sedang running dan juga untuk debug ketika container crash secara tiba tiba. Untuk log container sebaiknya di kasih batasan size jika tidak dibatasi akan membengkat dan memakan storage.
 
-![nginx-logs](./img/pekan-3/nginx-logs.png)
+![nginx-logs](./img/pekan-3/nginx-logs.webp)
 
 **docker inspect**
 
 Docker inspect digunakan untuk menampilakan semua informasi tentang container kita dalam format json.
 
-![inspect-container](./img/pekan-3/docker-inspect-nginx.png)
+![inspect-container](./img/pekan-3/docker-inspect-nginx.webp)
 
 **docker stats**
 
 docker stats untuk menampikan penggunaan resource pada suatu container mulai dari cpu, ram, io dan pids.
 
-![stats](./img/pekan-3/docker-stats.png)
+![stats](./img/pekan-3/docker-stats.webp)
 
 ---
 
@@ -153,7 +153,7 @@ Saya akan membuat **named volume** bernama `lab-vol` terlebih dahulu lalu saya a
 docker volume create lab-vol
 ```
 
-![inspect-and-create-volume](./img/pekan-3/docker-vol-and-inspect.png)
+![inspect-and-create-volume](./img/pekan-3/docker-vol-and-inspect.webp)
 
 Selanjut nya saya akan meng-run nginx dan meng-attach ke volume `lab-vol`.
 
@@ -161,7 +161,7 @@ Selanjut nya saya akan meng-run nginx dan meng-attach ke volume `lab-vol`.
 docker run --mount type=volume,source=lab-vol,target=/data -d nginx:stable-bookworm
 ```
 
-![attach-vol](./img/pekan-3/run-nginx-attach-vol.png)
+![attach-vol](./img/pekan-3/run-nginx-attach-vol.webp)
 
 Masuk ke container dan buat file `note.txt` didalam container `/data/note.txt`.
 
@@ -178,7 +178,7 @@ echo "ini file untuk test docker named volume" >> note.txt
 cat note.txt
 ```
 
-![create-note.txt](./img/pekan-3/create-txt.png)
+![create-note.txt](./img/pekan-3/create-txt.webp)
 
 #### Bind Mount
 

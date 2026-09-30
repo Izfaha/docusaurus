@@ -135,7 +135,7 @@ sudo kubeadm join 192.168.122.10:6443 --token uq4gjz.at7634fwbyjk2xhw \
   --node-name=node2
 ```
 
-![cluster-join-to-node2](./img/c-join-node2.png)
+![cluster-join-to-node2](./img/c-join-node2.webp)
 
 This is command and token to run on Node 3
 
@@ -146,7 +146,7 @@ sudo kubeadm join 192.168.122.10:6443 --token uq4gjz.at7634fwbyjk2xhw \
   --node-name=node3
 ```
 
-![cluster-join-to-node3](./img/c-join-node3.png)
+![cluster-join-to-node3](./img/c-join-node3.webp)
 
 #### Step 4 : Verify from Node 1 (On Node 1)
 
@@ -202,4 +202,4 @@ nginx   NodePort   10.96.53.194   <none>        80:32396/TCP   11s
 
 Access on browser `http://192.168.122.11:32396/`.
 
-![nginx](./img/nginx.png)
+![nginx](./img/nginx.webp)
