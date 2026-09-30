@@ -1,5 +1,15 @@
 ---
-sidebar_title: Ansible Labs
+title: Ansible Labs - Hands-on Automation Practice
+sidebar_label: Ansible Labs
+description: Hands-on Ansible labs covering inventory, playbooks, modules, variables, Ansible Vault, and automation practice on Linux servers.
+keywords:
+  - ansible
+  - ansible labs
+  - ansible tutorial
+  - ansible playbook
+  - linux automation
+  - devops
+slug: /ansible/labs
 ---
 
 # Ansible Labs
