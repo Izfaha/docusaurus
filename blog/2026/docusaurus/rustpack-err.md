@@ -2,7 +2,7 @@
 title: Internal Rustpack Error on Docusaurus
 date: 2026-09-19
 description: Rustpack internal error search prisma.js for pyhon syntax highlighting
-slug: ssd-access-denied-in-windows
+slug: rustpack-err
 authors: faiz_maulana_habibi
 tags: [linux]
 keywords: [data, ssd, forensic, recover, windows, storage]
