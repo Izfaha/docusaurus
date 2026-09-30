@@ -19,41 +19,56 @@ greetings:
   description: Article created by Fa'iz
 
 linux:
-  label: linux
+  label: Linux
   permalink: /linux
-  description: linux
+  description: Linux system administration, configuration, and troubleshooting.
 
 arch:
-  label: arch
+  label: Arch Linux
   permalink: /arch
-  description: Arch Linux
+  description: Arch Linux installation, customization, and package management.
 
 jetson-nano:
   label: Jetson Nano
   permalink: /jetson-nano
-  description: Jetson Nano
+  description: NVIDIA Jetson Nano setup, configuration, and embedded computing projects.
 
 secure:
-  label: Secure
+  label: Security
   permalink: /secure
-  description: Secure tag description
+  description: System security, access control, and hardening practices.
 
 c:
-  label: C-Language
+  label: C
   permalink: /c
-  description: C programming language
+  description: C programming fundamentals, memory management, and systems programming.
 
 python:
   label: Python
   permalink: /python
-  description: Python programming language
+  description: Python programming, scripting, and automation.
 
 network:
-  label: Network
+  label: Networking
   permalink: /network
-  description: Linux Netwoking 
+  description: Network configuration, connectivity, and troubleshooting on Linux.
 
 usb:
   label: USB
   permalink: /usb
-  description: USB 
+  description: USB device management, bootable media, and troubleshooting.
+
+ssh:
+  label: SSH
+  permalink: /ssh
+  description: Secure remote access, SSH configuration, tunneling, and port forwarding.
+
+networking:
+  label: Networking
+  permalink: /networking
+  description: Computer networking, connectivity, routing, and troubleshooting.
+
+tailscale:
+  label: Tailscale
+  permalink: /tailscale
+  description: Private networking and secure remote access using Tailscale.
