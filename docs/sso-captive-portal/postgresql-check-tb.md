@@ -36,5 +36,5 @@ Melihat pakah nas ada dalam daftar table.
 SELECT * FROM nas;
 ```
 
-![nas table](./img/nas-table.png)
+![nas table](./img/nas-table.webp)
 

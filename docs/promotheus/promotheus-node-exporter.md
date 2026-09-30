@@ -15,7 +15,7 @@ Promotheus is open-source system monitoring and alerting built by SoundCloud and
 
 This is the architecture of prometheus. 
 
-![architecture](./img/prometheus-architecture.png)
+![architecture](./img/prometheus-architecture.webp)
 
 Let's start installation.
 
@@ -27,7 +27,7 @@ On VM 2 we install node expoter to send data to VM 1 prometheus.
 sudo apt install -y prometheus-node-exporter
 ```
 
-![install-node-exp](./img/vm2-install-node-exporter.png)
+![install-node-exp](./img/vm2-install-node-exporter.webp)
 
 ### Enable node exporter.
 
@@ -40,7 +40,7 @@ sudo systemctl enable --now prometheus-node-exporter
 sudo systemctl status prometheus-node-exporter --no-pager
 ```
 
-![enabel-node-exp](./img/vm2-enable-node-exporter.png)
+![enabel-node-exp](./img/vm2-enable-node-exporter.webp)
 
 ### check endpoint from VM 2
 
@@ -51,7 +51,7 @@ Port default node exporter is `9100`.
 curl -fsS http://localhost:9100/metrics
 ```
 
-![check-enpoint](./img/vm2-check-endpoint-node-exporter-metrics.md.png)
+![check-enpoint](./img/vm2-check-endpoint-node-exporter-metrics.md.webp)
 
 ### check ram usage of VM 2 :
 
@@ -62,15 +62,15 @@ curl -fsS http://localhost:9100/metrics \
   | grep -E '^node_memory_(MemTotal|MemAvailable)_bytes'
 ```
 
-![check-ram](./img/vm1-check-ram-usage-on-vm2-in-mb.png)
+![check-ram](./img/vm1-check-ram-usage-on-vm2-in-mb.webp)
 
 Verify using `free -h` command.
 
-![free](./img/vm2-check-ram-usage-to-compare-result-of-prometheus.png)
+![free](./img/vm2-check-ram-usage-to-compare-result-of-prometheus.webp)
 
 Verify VM 1 can get metric from VM 2
 
-![get-metric](./img/vm2-check-resource-from-vm1-to-vm2.png)
+![get-metric](./img/vm2-check-resource-from-vm1-to-vm2.webp)
 
 ## Install Prometheus on VM 1
 
@@ -80,7 +80,7 @@ Install prometheus on VM 1.
 sudo apt install -y --no-install-recommends prometheus
 ```
 
-![install-prometheus](./img/vm1-install-prometheus.png)
+![install-prometheus](./img/vm1-install-prometheus.webp)
 
 ### Enable Prometheus service.
 
@@ -89,7 +89,7 @@ sudo systemctl enable --now prometheus
 sudo systemctl status prometheus --no-pager
 ```
 
-![enable-prometheus](./img/vm1-enable-prometheus.png)
+![enable-prometheus](./img/vm1-enable-prometheus.webp)
 
 :::note
 Jika instalasi menampilkan `Unable to locate package`, aktifkan repository Universe pada VM yang mengalami masalah.
@@ -112,7 +112,7 @@ sudo nano /etc/prometheus/prometheus.yml
       - targets: ["192.168.56.11:9100"]
 ```
 
-![config-promeheus](./img/vm1-add-target-to-vm2.png)
+![config-promeheus](./img/vm1-add-target-to-vm2.webp)
 
 Before we restart our promotheus, wise you check promtool before restart.
 
@@ -120,7 +120,7 @@ Before we restart our promotheus, wise you check promtool before restart.
 sudo promtool check config /etc/prometheus/prometheus.yml
 ```
 
-![check-prm](./img/vm1-check-conf-before-restart.png)
+![check-prm](./img/vm1-check-conf-before-restart.webp)
 
 ### Restart prometheus to apply configuration
 
@@ -129,17 +129,17 @@ sudo systemctl restart prometheus
 sudo systemctl status prometheus --no-pager
 ```
 
-![restart-prometheus](./img/vm1-restart-prometheus-conf.png)
+![restart-prometheus](./img/vm1-restart-prometheus-conf.webp)
 
 ### Open Promotheus from Browser
 
 Open browser type `192.168.56.10:9090`.
 
-![open-promotheus-via-browser](./img/vm1-check-prometheus-via-browser.png)
+![open-promotheus-via-browser](./img/vm1-check-prometheus-via-browser.webp)
 
 Open **Status** => **Targets**.
 
-![status-target](./img/vm1-check-promotheus-nodes-via-status-target.png)
+![status-target](./img/vm1-check-promotheus-nodes-via-status-target.webp)
 
 |Job|Endpoint|Status|
 |-----|-----|-----|
@@ -155,7 +155,7 @@ insert query
 ```
 up{job="node", instance="192.168.56.11:9100"}
 ```
-![insert](./img/vm1-check-metrics-vm2.png)
+![insert](./img/vm1-check-metrics-vm2.webp)
 
 :::note
 If result is 1 means success, 0 means failed to get RAM usage data.
@@ -178,7 +178,7 @@ Show The Persentage of RAM VM 2
 )
 ```
 
-![ram-persen-vm2](./img/vm1-check-prosentasi-ram-usage-on-vm2.png)
+![ram-persen-vm2](./img/vm1-check-prosentasi-ram-usage-on-vm2.webp)
 
 Show RAM usage in MB
 
@@ -196,6 +196,6 @@ Show RAM usage in MB
 ) / 1024 / 1024
 ```
 
-![ram-in-mb](./img/vm1-check-ram-usage-on-vm2-in-mb.png)
+![ram-in-mb](./img/vm1-check-ram-usage-on-vm2-in-mb.webp)
 
 Done! Thank You.

@@ -4,15 +4,15 @@ sidebar_title: Linux Kernel Development Process
 
 # Linux Kernel Development Process
 
-![Release Cycle](./img/RC.png)
+![Release Cycle](./img/RC.webp)
 
 ## Cycle
 
-![Cycle](./img/cycle.png)
+![Cycle](./img/cycle.webp)
 
 ## Time line 
 
-![Time Line](./img/timeline-example.png)
+![Time Line](./img/timeline-example.webp)
 
 ```sh
 ┌──────────────────────────┬──────────────┬───────────────────────────────┬──────────────┐
@@ -31,19 +31,19 @@ sidebar_title: Linux Kernel Development Process
 
 # Active Kernel Release
 
-![Abbreviation](./img/akr.png)
+![Abbreviation](./img/akr.webp)
 
 # Kernel Trees
 
-![Kernel Trees](./img/trees.png)
+![Kernel Trees](./img/trees.webp)
 
 # Subsystem Mainteners
 
-![Subs](./img/sub-main.png)
+![Subs](./img/sub-main.webp)
 
 [MAINTAINERS file](https://www.kernel.org/doc/linux/MAINTAINERS), 
 [Linux kernel mailing lists](https://subspace.kernel.org/vger.kernel.org.html)
 [list archives on lore.kernel.org](https://lore.kernel.org/)
 [kernel.org git repositories](https://git.kernel.org/)
 
-![image flow](./img/patch-flow.png)
+![image flow](./img/patch-flow.webp)

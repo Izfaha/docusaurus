@@ -26,7 +26,7 @@ Then extract via `tar` command :
 tar -zxvf grafana-enterprise_13.3.0-34793047961_34793047961_linux_amd64.tar.gz
 ```
 
-![extract-result](./img/grafana-file-extract.png)
+![extract-result](./img/grafana-file-extract.webp)
 
 I extracted on my home dir.
 
@@ -38,7 +38,7 @@ Let's create a user for grafana on system.
 sudo useradd -r -s /bin/false grafana
 ```
 
-![create-user-grafana](./img/create-user-for-grafana.png)
+![create-user-grafana](./img/create-user-for-grafana.webp)
 
 Verify using `getent` command :
 
@@ -46,7 +46,7 @@ Verify using `getent` command :
 getent passwd grafana
 ```
 
-![check-user-grafana](./img/check-user-grafana.png)
+![check-user-grafana](./img/check-user-grafana.webp)
 
 ## Move the unpacked binary to `/usr/local/grafana`
 
@@ -54,7 +54,7 @@ getent passwd grafana
 sudo mv grafana-13.3.0-34793047961 /usr/local/grafana
 ```
 
-![mv](./img/mv-grafana-to-usr-local-grafana.png)
+![mv](./img/mv-grafana-to-usr-local-grafana.webp)
 
 ## Change the owner of `/usr/local/grafana` to Grafana users
 
@@ -62,7 +62,7 @@ sudo mv grafana-13.3.0-34793047961 /usr/local/grafana
 sudo chown -R grafana:ubuntu /usr/local/grafana
 ```
 
-![chwon-grafana](./img/chown-to-grafana-users.png)
+![chwon-grafana](./img/chown-to-grafana-users.webp)
 
 ## Create a Grafana server in systemd 
 
@@ -88,7 +88,7 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 
-![systemd-grafana](./img/systemd-for-grafana.png)
+![systemd-grafana](./img/systemd-for-grafana.webp)
 
 ## Use the binary to manually start the Grafana server
 
@@ -98,7 +98,7 @@ WantedBy=multi-user.target
 
 You will see a lots output but don't worry jut terminate by hitting `Ctrl + C`.
 
-![output](./img/output-systemd.png)
+![output](./img/output-systemd.webp)
 
 ## Change the owner of `/usr/local/grafana` to Grafana users again to apply the ownership to the newly created `/usr/local/grafana/data` directory
 
@@ -106,7 +106,7 @@ You will see a lots output but don't worry jut terminate by hitting `Ctrl + C`.
 sudo chown -R grafana:users /usr/local/grafana
 ```
 
-![chown](./img/chown-user-grafana.png)
+![chown](./img/chown-user-grafana.webp)
 
 ## Copy file .ini
 
@@ -114,7 +114,7 @@ Before start grafana-server service keep in mind, you need to copy .ini file bec
 
 The error will be like this :
 
-![error](./img/error-in-grafana.png)
+![error](./img/error-in-grafana.webp)
 
 So don't forget to copy .ini file from sample.ini :p.
 
@@ -122,7 +122,7 @@ So don't forget to copy .ini file from sample.ini :p.
 sudo cp /usr/local/grafana/conf/sample.ini /usr/local/grafana/conf/grafana.ini
 ```
 
-![copy-ini](./img/copy-sample-ini-to-grafana-ini.png)
+![copy-ini](./img/copy-sample-ini-to-grafana-ini.webp)
 
 ## Start the service - grafana-service
 
@@ -130,11 +130,11 @@ sudo cp /usr/local/grafana/conf/sample.ini /usr/local/grafana/conf/grafana.ini
 sudo systemctl start grafana-server
 ```
 
-![start-grafana](./img/start-grafana-service.png)
+![start-grafana](./img/start-grafana-service.webp)
 
 Now check Grafana UI from your browser `192.168.57.10:3000`.
 
-![ui](./img/grafana-ui.png)
+![ui](./img/grafana-ui.webp)
 
 Username and password is `admin` but I create new passwor using grafana so username is `admin` and password is `grafana`. 
 

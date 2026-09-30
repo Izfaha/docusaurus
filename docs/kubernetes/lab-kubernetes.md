@@ -75,18 +75,18 @@ sudo virsh net-update default add ip-dhcp-host \
 --live --config
 ```
 
-![IP Reserv](./img/chage-ip-reserv.png)
+![IP Reserv](./img/chage-ip-reserv.webp)
 
 - Setelah merubah IP dan hostname saya harus me`reboot` vms nya.
 
 - VM 1 (k8s-master)
-![vm-master](./img/vm-master.png)
+![vm-master](./img/vm-master.webp)
 
 - VM 2 (k8s-worker-1)
-![vm-worker-1](./img/vm-worker-1.png)
+![vm-worker-1](./img/vm-worker-1.webp)
 
 - VM 3 (k8s-worker-2)
-![vm-worker-2](./img/vm-worker-2.png)
+![vm-worker-2](./img/vm-worker-2.webp)
 
 ### Modul Kernel 
 
@@ -111,13 +111,13 @@ sudo modprobe br_netfilter
 Screenshot :
 Screenshot :
 - VM1 (k8s-master => 192.168.122.10)
-![vm1-enabel-kernel-module](./img/vm1-kernel.png)
+![vm1-enabel-kernel-module](./img/vm1-kernel.webp)
 
 - VM2 (k8s-worker-1 => 192.168.122.11)
-![vm1-enabel-kernel-module](./img/vm2-kernel.png)
+![vm1-enabel-kernel-module](./img/vm2-kernel.webp)
 
 - VM1 (k8s-worker-2 => 192.168.122.12)
-![vm1-enabel-kernel-module](./img/vm3-kernel.png)
+![vm1-enabel-kernel-module](./img/vm3-kernel.webp)
 
 
 #### 2. Konfigurasi Parameter Jaringan (Sysctl)
@@ -138,13 +138,13 @@ sudo sysctl --system
 
 Screenshot :
 - VM1 (k8s-master => 192.168.122.10)
-![vm1-enabel-kernel-module](./img/vm1-enable-kernel-module.png)
+![vm1-enabel-kernel-module](./img/vm1-enable-kernel-module.webp)
 
 - VM2 (k8s-worker-1 => 192.168.122.11)
-![vm1-enabel-kernel-module](./img/vm2-enable-kernel-module.png)
+![vm1-enabel-kernel-module](./img/vm2-enable-kernel-module.webp)
 
 - VM1 (k8s-worker-2 => 192.168.122.12)
-![vm1-enabel-kernel-module](./img/vm3-enable-kernel-module.png)
+![vm1-enabel-kernel-module](./img/vm3-enable-kernel-module.webp)
 
 Setelah menjalankan perintah di atas di semua VM, kamu bisa memastikan modul sudah aktif dengan mengetik: 
 

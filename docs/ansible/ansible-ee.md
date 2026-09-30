@@ -18,7 +18,7 @@ I am using ubuntu 24.04 on VirtualBox (2G of RAM and 25G of storage).
 sudo apt install podman python3 python3-pip
 ```
 
-![install-deps-for-ansible-ee](./img/ansible-ee/install-deps.png)
+![install-deps-for-ansible-ee](./img/ansible-ee/install-deps.webp)
 
 Install `ansible-navigator` via pip3.
 
@@ -28,7 +28,7 @@ pip3 install ansible-navigator
 
 When I hit the command i got a message like this :
 
-![err-msg-install-via-pip3](./img/ansible-ee/err-when-install-via-pip3.png)
+![err-msg-install-via-pip3](./img/ansible-ee/err-when-install-via-pip3.webp)
 
 Why? It happens as I try install a package via other apt, in which `pip3 install` can change or cause a conflic env managed by ubuntu system `apt`. So how do I install? the alternative is create venv for my project.
 
@@ -54,7 +54,7 @@ python -m pip install ansible-navigator ansible-builder
 
 This is my output when doing the steps above if you encounter any issue please let me know or catch me up on my email `rasberry006@gmail.com`.
 
-![result](./img/ansible-ee/install-deps-on-venv.png)
+![result](./img/ansible-ee/install-deps-on-venv.webp)
 
 We have done the installation deps, now let's check each version.
 

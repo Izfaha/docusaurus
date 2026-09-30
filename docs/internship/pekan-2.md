@@ -12,7 +12,7 @@ Pertama pasang semua ip static host-only **di semua VM**, dengan memasukannya ke
 192.168.56.13 infra
 ```
 
-![etc-hosts](./img/pekan-2/pasang-ip-static-host-only-di-semua-vm.png)
+![etc-hosts](./img/pekan-2/pasang-ip-static-host-only-di-semua-vm.webp)
 
 > [!Note]
 > Ini digunakan agar antar VM bisa saling mengenali, contoh dari vm manager1 mau ssh ke worker1, dari pada `ssh ubuntu@192.168.56.11` lebih baik memakai nama seperti ini `ssh ubuntu@worker1`.
@@ -23,7 +23,7 @@ Selanjut nya kita perlu meng update repository **di semua VM** dulu dengan menja
 sudo apt update
 ```
 
-![update-repo](./img/pekan-2/update-di-semua-vm.png)
+![update-repo](./img/pekan-2/update-di-semua-vm.webp)
 
 Lalu install rcyn cron lvm2 ssh-server git :
 
@@ -31,7 +31,7 @@ Lalu install rcyn cron lvm2 ssh-server git :
 sudo apt install rsync openssh-server cron lvm2 git
 ```
 
-![install](./img/pekan-2/install-rsync-git-etc.png)
+![install](./img/pekan-2/install-rsync-git-etc.webp)
 
 Ternyata semua depedency sudah terinstall semua.
 
@@ -41,7 +41,7 @@ Sekarang saya check cronjob nya dengan command :
 systemctl status cron
 ```
 
-![check-cron](./img/pekan-2/check-cron.png)
+![check-cron](./img/pekan-2/check-cron.webp)
 
 Untuk memastikan vm bisa di remote, saya mengecheck dengan command :
 
@@ -49,7 +49,7 @@ Untuk memastikan vm bisa di remote, saya mengecheck dengan command :
 systemctl status ssh.service ssh.socket --no-pager
 ```
 
-![cek-ssh](./img/pekan-2/check-ssh-service-dan-socket.png)
+![cek-ssh](./img/pekan-2/check-ssh-service-dan-socket.webp)
 
 > [!NOTE]
 > Untuk kenapa command saya tanpa sudo, saya sudah menjalankan `sudo su` sebelumnya...
@@ -93,7 +93,7 @@ Untuk isi dari lab-report.service nya kurang lebih seperti ini :
 - `-t` : untuk memberikan tag agar mudah dicari, dalam case ini tag nya `week02-lab`.
 - `Latihan systemd berhasil dijalankan` : ini adalah pesan yg harus dicatat dan akan ditampilkan di journalctl loggind dan kita yg menentukan sendiri.
 
-![systemd](./img/pekan-2/file-lab-report-service-systemd.png)
+![systemd](./img/pekan-2/file-lab-report-service-systemd.webp)
 
 Setelah itu harus meminta si systemd nya untuk membaca unit baru, dengan command :
 
@@ -101,14 +101,14 @@ Setelah itu harus meminta si systemd nya untuk membaca unit baru, dengan command
 sudo systemctl daemon-reload
 ```
 
-![start-lab-report](./img/pekan-2/start-service-lab-report.png)
+![start-lab-report](./img/pekan-2/start-service-lab-report.webp)
 
 > [!NOTE]
 > Command `sudo systemctl daemon-reload` hanya di jalankan ketika membuat service systemd atau ada unit baru yg di buat.
 
 Ketika melihat di `journalctl` akan kelihatan pesan `Latihan systemd berhasil di jalankan.`
 
-![journalctl-log](./img/pekan-2/log-systemd-service-lab-report.png)
+![journalctl-log](./img/pekan-2/log-systemd-service-lab-report.webp)
 
 #### User, group, dan permission
 
@@ -123,7 +123,7 @@ Pembuatan group `devops` :
 sudo groupadd devops
 ```
 
-![create-user-devops](./img/pekan-2/creating-group-devops.png)
+![create-user-devops](./img/pekan-2/creating-group-devops.webp)
 
 Pembuatan user `faiz` :
 
@@ -131,7 +131,7 @@ Pembuatan user `faiz` :
 sudo adduser faiz
 ```
 
-![create-user-faiz](./img/pekan-2/create-user-faiz.png)
+![create-user-faiz](./img/pekan-2/create-user-faiz.webp)
 
 > [!NOTE]
 > Disini saya sudah membuat user `faiz` tapi belum masuk group `devops`
@@ -142,11 +142,11 @@ Sekarang saya akan menambahkan user `faiz` ke group `devops`.
 sudo usermod -aG devops faiz
 ```
 
-![add-faiz-to-devops](./img/pekan-2/add-faiz-to-devios.png)
+![add-faiz-to-devops](./img/pekan-2/add-faiz-to-devios.webp)
 
 ini adalah rincian lengkap uid dan gid dari user faiz.
 
-![id-faiz](./img/pekan-2/id-faiz.png)
+![id-faiz](./img/pekan-2/id-faiz.webp)
 
 Sekarang saya akan membuat direktori `/srv/project-lab` dan membuat file `note.txt`.
 
@@ -156,7 +156,7 @@ sudo install -d -o root -g devops -m 2770 /srv/project-lab
 
 disini saya membuat dir `/srv/project-lab` dengan kepemilikan root `-o root` dan group devops `-g devops` dengan permission read,write,execute untuk user dan group.
 
-![srv](./img/pekan-2/srv-project-lab-dir.png)
+![srv](./img/pekan-2/srv-project-lab-dir.webp)
 
 Pembuatan file `note.txt` :
 
@@ -165,7 +165,7 @@ su - faiz bash -c 'umask 007;printf "catatan permission" > /srv/project-lab/note
 ```
 command ini termasuk baru bagi saya, pemahaman saya kurang lebih nya seperti ini, jalan kan command dengan user `faiz` pake bash `bash -c '...'`, didalam bash itu ada command untuk atur permission default untuk file baru dan memperbolehkan `owner` dan `group` untuk mengakses dan `others` tidak boleh akses file `note.txt`.
 
-![note](./img/pekan-2/create-file-note-on-srv-project-lab.png)
+![note](./img/pekan-2/create-file-note-on-srv-project-lab.webp)
 
 #### Membaca kondisi disk dan berlatih LVM
 
@@ -173,7 +173,7 @@ Source [lvm](https://medium.com/@habibullah.127.0.0.1/what-is-lvm-lvm-architectu
 
 - Buat Image di `/var/tmp`.
 
-![img](./img/pekan-2/lvm-img.png)
+![img](./img/pekan-2/lvm-img.webp)
 
 Ini dalah image yg saya buat untuk buat latihan sementara.
 
@@ -191,7 +191,7 @@ sudo vgcreate vg_week02_lab /dev/loop0
 
 Jadi kita buat volume group yg kita ikat ke /dev/loop0.
 
-![vg](./img/pekan-2/buat-volume-group.png)
+![vg](./img/pekan-2/buat-volume-group.webp)
 
 - Buat Logical Volume
 
@@ -199,7 +199,7 @@ Jadi kita buat volume group yg kita ikat ke /dev/loop0.
 sudo lvcreate -L 256M -n configs vg_week02_lab
 ```
 
-![create-lv](./img/pekan-2/create-logical-volume.png)
+![create-lv](./img/pekan-2/create-logical-volume.webp)
 
 - Buat file system ext4 (vg_week02_lab)
 
@@ -207,7 +207,7 @@ sudo lvcreate -L 256M -n configs vg_week02_lab
 sudo mkfs.ext4 /dev/vg_week02_lab
 ```
 
-![ext4](./img/pekan-2/create-file-system-ext4.png)
+![ext4](./img/pekan-2/create-file-system-ext4.webp)
 
 Kita langsung buat folder untuk nge-mount si `/dev/vg_week02_lab`.
 
@@ -215,7 +215,7 @@ Kita langsung buat folder untuk nge-mount si `/dev/vg_week02_lab`.
 sudo mkdir -p /mnt/week02-lvm
 ```
 
-![mount](./img/pekan-2/hasil-mount.png)
+![mount](./img/pekan-2/hasil-mount.webp)
 
 Jika mau buat LVM, kita harus cemat terhadap step-by-step pembuatan nya, yaitu :
 
@@ -276,7 +276,7 @@ I create user for rsync in *vm infra*, i will use this user to do backup job via
 sudo useradd --disabled-password --gecos "" backupmgr
 ```
 
-![user-backup](./img/pekan-2/creat-user-for-rsync.png)
+![user-backup](./img/pekan-2/creat-user-for-rsync.webp)
 
 Now, we need to create dirs for backup, in this case I will create on `/var/backup/manager1`.
 
@@ -286,7 +286,7 @@ sudo install -d -o backupmgr -g backupmgr -m 0700 /var/backups/manager1
 
 This command tells that we create directory name `backupmgr` group on `backupmgr` and permission write, read and execute for user `backupmgr` on dir `/var/backups/manager1`.
 
-![bacups-file](./img/pekan-2/file-var-backups.png)
+![bacups-file](./img/pekan-2/file-var-backups.webp)
 
 **Create SSH key (VM manager1)**
 
@@ -301,7 +301,7 @@ sudo ssh-keygen -t ed25519 -f /root/.ssh/id_ed25519_backup_infra -N '' -C 'manag
 `-t` is type of hash algorithm and `-f` is where key should be located and `-N` means no passphrase when login `-C` for comment.
 :::
 
-![sshkey](./img/pekan-2/gen-sshkey-on-manager1.png)
+![sshkey](./img/pekan-2/gen-sshkey-on-manager1.webp)
 
 **Create .ssh directory (VM infra)**
 
@@ -312,7 +312,7 @@ Create .ssh dir to save the key of manager1 vm in `known_host` vm infra.
 sudo install -d -o backupmgr -g backupmgr -m 0700 /home/backupmgr/.ssh
 ```
 
-![create-on-vm](./img/pekan-2/create-dot-ssh-on-vm-infra.png)
+![create-on-vm](./img/pekan-2/create-dot-ssh-on-vm-infra.webp)
 
 **Daftarkan Key public vm manager1 ke vm infra user `backupmgr`**
 
@@ -322,7 +322,7 @@ on VM infra
 sudo -u backupmgr sh -c 'umask 077; nano /home/backupmgr/.ssh/authorized_keys'
 ```
 
-![copy-key-from-manager1](./img/pekan-2/copy-keys-from-vm-manager.png)
+![copy-key-from-manager1](./img/pekan-2/copy-keys-from-vm-manager.webp)
 
 then paste your public key in vm manager1 to infra on nano and don't forget to add `from="192.168.56.10",restrict`.
 
@@ -334,7 +334,7 @@ Run this command from VM infra to verify the key of vm manager1
 sudo ssh-keygen -l -f /etc/ssh/ssh_host_ed25519_key.pub
 ```
 
-![catat-sidik-jari](./img/pekan-2/sidik-jari-host.png)
+![catat-sidik-jari](./img/pekan-2/sidik-jari-host.webp)
 
 Let's try connection between 2 vms.
 
@@ -342,7 +342,7 @@ Let's try connection between 2 vms.
 sudo ssh -i /root/.ssh/id_ed25519_backup_infra -o IdentitiesOnly=yes -o PasswordAuthentication=no backupmgr@192.168.56.13 'whoami'
 ```
 
-![cek-whoami-ssh](./img/pekan-2/cek-woami-ssh.png)
+![cek-whoami-ssh](./img/pekan-2/cek-woami-ssh.webp)
 
 :::warning
 Jika `Permission Denied` cek kembali apakah key vm manager1 nya sudah dimasukan ke known_host di vm infra.
@@ -356,13 +356,13 @@ saya akan mencoba mengetek koneksi memakai rsync, mengcopy `/etc/netplan/` dari 
 sudo rsync -a --no-owner --no-group --dry-run --itemize-changes -e 'ssh -i /root/.ssh/id_ed25519_backup_infra -o IdentitiesOnly=yes -o BatchMode=yes' /etc/netplan/ backupmgr@192.168.56.13:/var/backups/manager1/netplan/
 ```
 
-![cek-koneksi](./img/pekan-2/cek-using-rsync.png)
+![cek-koneksi](./img/pekan-2/cek-using-rsync.webp)
 
 Ini akan meng-sinkronkan `/etc/netplan/` dari vm manager1 ke `/var/backups/manager1/` di vm infra. `--dry-run` ini cuman tes koneksi aja nggak sampe mengirim file. `--itemize-changes` menampilkan item apa aja yg akan disalin. `--no-group` dan `--no-owner` membuat salinan file atau dir tetap di miliki oleh user `backupmgr` dan group `backupmgr` bukan menetapkan kepemilikan ke `root`.
 
 Ini adalah hasil dari backup manager1 ke infra :
 
-[backup-berhasil](./img/pekan-2/backup-rsync-berhasil.png)
+[backup-berhasil](./img/pekan-2/backup-rsync-berhasil.webp)
 
 **Pembuatan Script Bash untuk Rsync (VM1 manager1)**
 
@@ -394,7 +394,7 @@ rsync -a --no-owner --no-group --chmod=D700,F600 --itemize-changes \
 printf '%s backup berhasil\n' "$(date -Is)"
 ```
 
-![bash](./img/pekan-2/bash-rsync.png)
+![bash](./img/pekan-2/bash-rsync.webp)
 
 Pastikan untuk add permission `execute` ke script bash (backup-manager1-config.sh) nya.
 
@@ -408,7 +408,7 @@ disini saya membuat cronjob conf di `/etc/cron.d/manager1-backup`.
 
 Itu akan backup setiap 1 detik sekali tapi juga pastikan permission `manager1-backup` nya udah 644 yaitu `write` and `read` untuk `user` dan `read` untuk `group` dan `others`.
 
-![cronjob](./img/pekan-2/cron.png)
+![cronjob](./img/pekan-2/cron.webp)
 
-![cronjob-berhasil](./img/pekan-2/cron-daemon.png)
+![cronjob-berhasil](./img/pekan-2/cron-daemon.webp)
 
