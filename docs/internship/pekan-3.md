@@ -182,10 +182,101 @@ cat note.txt
 
 #### Bind Mount
 
-Yang kedua adalah **Bind Mount** skema volum yg sepenuhnya dihandle oleh kita sendiri dan kita juga perlu menyiapkan direktori untuk di bind mount ke dalam container.
+Yang kedua adalah **Bind Mount** skema volum yg sepenuhnya dihandle oleh kita sendiri dan kita juga perlu menyiapkan file `index.html` untuk di bind mount ke dalam container.
+
+```bash
+docker run --name nginx --rm -p 8080:80 --mount type=bind,src=./index.html,dst=/usr/share/nginx/html/index.html,readonly -d nginx:stable-bookworm
+```
+
+Saya memiliki file `index.html` lalu saya bind mount ke `/usr/share/nginx/html/index.html` di dalam container.
+
+![bind-mount](./img/pekan-3/nginx-bind-mount.png)
+
+:::warning
+Sebelumnya saya mendapati error yaitu 
+```
+docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting "/home/ubuntu/pekan3/docker/index.html" to rootfs at "/usr/share/nginx/html": mount src=/home/ubuntu/pekan3/docker/index.html, dst=/usr/share/nginx/html, dstFd=/proc/thread-self/fd/14, flags=MS_BIND|MS_REC: not a directory: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type
+```
+dan ini terjadi karena saya ingin mencoba mounting direktori ke file karena command saya sebelumnya itu 
+
+```bash
+docker run --name nginx --rm -p 8080:80 --mount type=bind,src=./index.html,dst=/usr/share/nginx/html,readonly -d nginx:stable-bookworm
+```
+pada `dst` saya belum menuliskan nama file yg ingin saya mount yaitu `index.html`.
+:::
 
 ### Network - bridge, host, none and user-defined bridge
+
+#### Bridge
+
+Container yg berjalan tanpa menmebrikan argumen `--network` akan secara default menggunakan bridge network.
+
+```bash
+docker run -d --name nginx -p 8080:80 nginx:stable-bookworm
+
+# cek network ip dari container nginx
+docker inspect nginx --format 'Network={{.HostConfig.NetworkMode}} IP={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
+```
+
+![bridge](./img/pekan-3/network-bridge.png)
+
+#### Host
+
+Ini memakai jaringan host yaitu VM itu sendiri. Jadi saya meng-run nginx pake `--network host` ip dan port nya akan memakai punya nya si VM bukan buatan container docker.
+
+```bash
+docker run -d --network host nginx:stable-bookworm
+```
+
+![host-net](./img/pekan-3/network-host.png)
+
+#### None
+
+```
+docker run -d --network none nginx:stable-bookworm
+```
+
+![none](./img/pekan-3/network-none.png)
+
+#### User-defined bridge
+
+```
+docker network create net-bridge
+
+docker network ls
+```
+
+![user-defined](./img/pekan-3/create-net-bridge-user-defined.png)
+
+Let's inspect `net-bridge` ini bakalan nampilih semua informasi tentang networknya.
+
+```
+docker network inspect net-bridge
+```
+
+![inspect](./img/pekan-3/inspect-net-bridge.png)
 
 ---
 
 ## Restart policy dan batas resource (-memory, -cpus).
+
+Restart policy mengatur kapan Docker menyalakan lagi container. Resource limitation untuk memberikan limitasi penggunaan cpu dan memory pada suatu container kalo container mengonsumsi resouce melebihi batas yg di limitasi makan docker akan menghentikan container tersebut melalui mekanisme Out-Of-Memory (OOM).
+
+```bash
+docker run -d --name nginx_limits --memory 128m --cpus 0.5 -p 8080:80 --network net-bridge nginx:stable-bookworm
+```
+
+Untuk command saya menggunakan `--memory 128m` untuk melimitasi container berapa max usage memory dan `--cpus 0.5` untuk melimitasi cpu.  
+
+![limitation](./img/pekan-3/limit-cpus-memory.png)
+
+![stats](./img/pekan-3/docker-stats-nginx.png)
+
+Resource Policy table :
+
+| Command | Description |
+| ----- | ----- |
+| no | Container akan langsung mati ketika proses gagal |
+| on-failure:3 | Coba mulai container max 3 kunless-stoppedali |
+| restart | Container akan mulai lagi ketika proses gagal, termasuk yg sebelumnya di hentikan |
+| unless-stopped | Container akan start kecuali container yg di stop manual |
