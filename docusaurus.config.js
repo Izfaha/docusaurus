@@ -13,7 +13,7 @@ const config = {
   // title on homepage
   title: 'Fa\'iz Maulana Habibi',
   tagline: 'Bridging infrastructure, security, and the low-level stack. Passionate about Linux internals, breaking things to understand how they work, and automating the rest. Always tinkering beneath the abstraction layer.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -157,7 +157,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['c', 'python', 'bash'],
+        additionalLanguages: ['c', 'python', 'bash', 'yaml'],
       },
     }),
 };
