@@ -1,5 +1,21 @@
 ---
-sidebar_title: Pekan 3
+title: Docker Fundamentals - Container, Volume, Network, and Resource Limits
+sidebar_label: Pekan 3 - Docker Fundamentals
+sidebar_position: 5
+description: Praktik dasar Docker meliputi instalasi Docker Engine, konsep image dan container, perintah run, exec, logs, inspect, dan stats, penggunaan volume dan Docker network, serta restart policy dan pembatasan resource container.
+keywords:
+  - docker
+  - docker fundamentals
+  - docker engine
+  - docker container
+  - docker image
+  - docker volume
+  - docker network
+  - docker stats
+  - docker resource limits
+  - docker restart policy
+  - devops
+slug: /devops/docker-fundamentals
 ---
 
 # Pekan 3 - Docker fundamental
