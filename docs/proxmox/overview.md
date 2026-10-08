@@ -26,7 +26,7 @@ VM Spec :
 
 Proxmox give us a web interface to easily managed, like this. 
 
-![proxmox-ve-dashboard](./img/proxmox-dashboard.png)
+![proxmox-ve-dashboard](./img/proxmox-dashboard.webp)
 
 Look prety cool, all is set and just click it up not overwhemed like managing openstack lol, which needs at least 2 nodes. Back to the point, on this dashboard we can create VM or Container, also managing VM network through it. this is [iso file](https://www.proxmox.com/en/products/proxmox-virtual-environment/get-started) for proxmox version 9.2 when I write this article. 
 
@@ -40,25 +40,25 @@ Then, click `ISO Images` and look for and click `Upload` button.
 You can get image via upload and download from URL.
 :::
 
-![place-iso-in-proxmox](./img/upload-proxmox-iso.png)
+![place-iso-in-proxmox](./img/upload-proxmox-iso.webp)
 
 After hit `Upload` button, you will be served an upload pop up, just hit `Select File` then `Upload`.
 
-![select-iso](./img/select-iso-proxmox.png)
+![select-iso](./img/select-iso-proxmox.webp)
 
 There will be pup up showing the uploading process, just wait and drink your americano :p.
 
-![upload-iso-process](./img/upload-iso-process.png)
+![upload-iso-process](./img/upload-iso-process.webp)
 
 While uploading process you will see this task viewer output, see on status now the status process is `running` means upload process have not completed, just wait until status `stopped:OK`.
 
-![task-viewer-output](./img/task-viewer-output.png)
+![task-viewer-output](./img/task-viewer-output.webp)
 
-![task-viewer-status](./img/task-viewer-status.png)
+![task-viewer-status](./img/task-viewer-status.webp)
 
 status `stopped:OK`
 
-![status-ok](./img/task-viewer-status-ok.png)
+![status-ok](./img/task-viewer-status-ok.webp)
 
 or until there is text on `Output`:
 
@@ -67,7 +67,7 @@ finished file import successfully
 TASK OK
 ```
 
-![output](./img/task-viewer-output-success.png)
+![output](./img/task-viewer-output-success.webp)
 
 Done upload.
 
